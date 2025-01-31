@@ -11,7 +11,7 @@
         <section class="registraion-section">
             <div class="card-header">Registration</div>
             <div class="card-body">
-                <form method="POST" action="{{ route('register.store') }}">
+                <form method="POST" action="{{ route('register.store') }}" novalidate>
                     @csrf
                     <div class="input-group">
                         <i class="fa-solid fa-user"></i>
