@@ -20,11 +20,26 @@
                 <div id="mask">
                     <button id="close_btn" class="close_btn">×</button>
                     <nav id="navi" class="nav-wrapper">
-                        <ul class="menu">
-                            <li class="menu_item"><a href="">HOME</a></li>
-                            <li class="menu_item"><a href="{{ route('register.show') }}">Registration</a></li>
-                            <li class="menu_item"><a href="">Login</a></li>
-                        </ul>
+                        @guest
+                            <ul class="menu">
+                                <li class="menu_item"><a href="">HOME</a></li>
+                                <li class="menu_item"><a href="{{ route('register.show') }}">Registration</a></li>
+                                <li class="menu_item"><a href="{{ route('auth.store') }}">Login</a></li>
+                            </ul>
+                        @endguest
+
+                        @auth
+                            <ul class="menu">
+                                <li class="menu_item"><a href="">HOME</a></li>
+                                <li class="menu_item">
+                                    <form action="{{ route('auth.destroy') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="logout-button">Logout</button>
+                                    </form>
+                                </li>
+                                <li class="menu_item"><a href="">MyPage</a></li>
+                            </ul>
+                        @endauth
                     </nav>
                 </div>
                 <a href=""><span class="site-name">Rese</span></a>
