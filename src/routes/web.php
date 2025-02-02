@@ -21,4 +21,6 @@ Route::group([], function () {
     Route::get('/thanks', [RegisterController::class, 'thanks'])->name('register.thanks');
 
     Route::get('/login', [AuthController::class, 'show'])->name('auth.show');
+    Route::post('/login', [AuthController::class, 'store'])->name('auth.store');
+    Route::post('/logout', [AuthController::class, 'destroy'])->name('auth.destroy');
 });

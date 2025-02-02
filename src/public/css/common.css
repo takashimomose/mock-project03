@@ -83,12 +83,28 @@ body {
     text-align: center;
     font-size: 1.5rem;
     color: #3560F6;
-    margin-top: 80px;
+    padding: 100px 0;
 }
 
 .menu li {
     margin-bottom: 20px;
     list-style: none;
+    font-weight: 500;
+}
+
+.menu a:visited {
+    color: #3560F6;
+}
+
+.menu button {
+    background: none;
+    border: none;
+    color: #3560F6;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
 }
 
 .site-name {
