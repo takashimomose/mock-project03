@@ -24,6 +24,7 @@ body {
     background-color: #EEE;
     height: 80px;
     padding: 0 20px;
+    max-width: 1168px;
 }
 
 .toggle_btn {

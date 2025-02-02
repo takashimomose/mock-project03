@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([], function () {
+    Route::get('/', [ShopController::class, 'index'])->name('shop.index');
     Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/thanks', [RegisterController::class, 'thanks'])->name('register.thanks');
