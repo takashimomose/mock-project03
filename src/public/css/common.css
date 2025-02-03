@@ -36,9 +36,7 @@ body {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 }
 
-.search-bar select,
-i,
-input {
+.search-bar select, i, input {
     margin-right: 10px;
     padding: 8px;
     font-size: 1rem;

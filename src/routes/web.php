@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([], function () {
-    Route::get('/', [ShopController::class, 'index'])->name('shop.index');
     Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/thanks', [RegisterController::class, 'thanks'])->name('register.thanks');
@@ -25,4 +24,8 @@ Route::group([], function () {
     Route::get('/login', [AuthController::class, 'show'])->name('auth.show');
     Route::post('/login', [AuthController::class, 'store'])->name('auth.store');
     Route::post('/logout', [AuthController::class, 'destroy'])->name('auth.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 });
