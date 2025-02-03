@@ -53,6 +53,10 @@
     object-fit: cover;
 }
 
+.card-content a {
+    color: inherit;
+}
+
 .card-buttons {
     display: flex;
     align-items: center;
@@ -60,13 +64,18 @@
     width: 100%;
 }
 
-.card-content button {
+.shop-detail {
     background: #3560F6;
     color: #FFF;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.heart {
+    border: none;
+    background: none;
 }
 
 .card-buttons i {

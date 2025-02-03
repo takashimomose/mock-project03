@@ -14,15 +14,20 @@
                     <img src="{{ $shop->shop_image }}" alt="仙人">
                     <div class="card-content">
                         <h2>{{ $shop->name }}</h2>
-                        <a href="">#{{ $shop->area_name }}</a>
-                        <a href="">#{{ $shop->genre_name }}</a>
+                        <a href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
+                        <a href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
                         <div class="card-buttons">
-                            <button>詳しくみる</button>
-                            @if ($shop->likes_user_id)
-                                <i class="fa-solid fa-heart" style="color: #EB3223"></i>
-                            @else
-                                <i class="fa-solid fa-heart"></i>
-                            @endif
+                            <button class="shop-detail">詳しくみる</button>
+                            <form action="{{ route('shop.like', ['shop_id' => $shop->id]) }}" method="POST">
+                                @csrf
+                                <button class="heart">
+                                    @if ($shop->likes_user_id)
+                                        <i class="fa-solid fa-heart" style="color: #EB3223"></i>
+                                    @else
+                                        <i class="fa-solid fa-heart"></i>
+                                    @endif
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
