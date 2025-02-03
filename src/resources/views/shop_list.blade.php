@@ -8,43 +8,25 @@
 
 @section('content')
     <main class="wrapper">
-        <section class="register-thanks-section">
+        <section class="shop-list-section">
+            @foreach ($shops as $shop)
                 <div class="card">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
+                    <img src="{{ $shop->shop_image }}" alt="仙人">
                     <div class="card-content">
-                        <h2>仙人</h2>
-                        <p>#東京都 #寿司</p>
-                        <button>詳しくみる</button>
-                        <span class="heart">❤️</span>
+                        <h2>{{ $shop->name }}</h2>
+                        <a href="">#{{ $shop->area_name }}</a>
+                        <a href="">#{{ $shop->genre_name }}</a>
+                        <div class="card-buttons">
+                            <button>詳しくみる</button>
+                            @if ($shop->likes_user_id)
+                                <i class="fa-solid fa-heart" style="color: #EB3223"></i>
+                            @else
+                                <i class="fa-solid fa-heart"></i>
+                            @endif
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="牛助">
-                    <div class="card-content">
-                        <h2>牛助</h2>
-                        <p>#大阪府 #焼肉</p>
-                        <button>詳しくみる</button>
-                        <span class="heart">🤍</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                    <div class="card-content">
-                        <h2>仙人</h2>
-                        <p>#東京都 #寿司</p>
-                        <button>詳しくみる</button>
-                        <span class="heart">❤️</span>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="牛助">
-                    <div class="card-content">
-                        <h2>牛助</h2>
-                        <p>#大阪府 #焼肉</p>
-                        <button>詳しくみる</button>
-                        <span class="heart">🤍</span>
-                    </div>
-                </div>
+            @endforeach
         </section>
     </main>
 @endsection

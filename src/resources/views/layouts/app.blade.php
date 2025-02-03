@@ -44,12 +44,16 @@
                 </div>
                 <a href=""><span class="site-name">Rese</span></a>
             </h1>
-            <nav class="header-nav">
-                <ul class="header-nav-list">
-                    <ul class="header-nav-list">
-                    </ul>
-                </ul>
-            </nav>
+            <div class="search-bar">
+                <select>
+                    <option>All area</option>
+                </select>
+                <select>
+                    <option>All genre</option>
+                </select>
+                <button class="fa-solid fa-search"></button>
+                <input type="text" placeholder="Search ...">
+            </div>
         </div>
     </header>
     @yield('content')
