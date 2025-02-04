@@ -21,15 +21,24 @@ class ShopController extends Controller
         $areas = Area::getAreas();
         $genres = Genre::getGenres();
 
+        session()->put('shop_search_params', $request->query());
+
         return view('shop_list', compact('shops', 'areas', 'genres'));
     }
 
-    public function like($shop_id)
+    public function like(Request $request, $shop_id)
     {
+
         $userId = Auth::id();
 
         Like::toggleLike($shop_id, $userId);
 
-        return redirect()->route('shop.index');
+        $queryParams = $request->query();
+
+        if (empty($queryParams)) {
+            $queryParams = session()->get('shop_search_params', []);
+        }
+
+        return redirect()->route('shop.index', $queryParams);
     }
 }
