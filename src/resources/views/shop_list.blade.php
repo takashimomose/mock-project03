@@ -11,7 +11,7 @@
         <section class="shop-list-section">
             @foreach ($shops as $shop)
                 <div class="card">
-                    <img src="{{ $shop->shop_image }}" alt="仙人">
+                    <img src="{{ $shop->shop_image }}" alt="{{ $shop->name }}">
                     <div class="card-content">
                         <h2>{{ $shop->name }}</h2>
                         <a href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
