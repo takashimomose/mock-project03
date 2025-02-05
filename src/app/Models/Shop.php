@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Shop extends Model
 {
@@ -20,19 +19,14 @@ class Shop extends Model
         'shop_image',
     ];
 
-    const AREA_IDS = [
-        1 => '東京都',
-        2 => '大阪府',
-        3 => '福岡県',
-    ];
+    public static array $AREA_IDS = [];
+    public static array $GENRE_IDS = [];
 
-    const GENRE_IDS = [
-        1 => '寿司',
-        2 => '焼肉',
-        3 => '居酒屋',
-        4 => 'イタリアン',
-        5 => 'ラーメン',
-    ];
+    public static function initializeConstants()
+    {
+        self::$AREA_IDS = Area::pluck('name', 'id')->toArray();
+        self::$GENRE_IDS = Genre::pluck('name', 'id')->toArray();
+    }
 
     public function likes()
     {
@@ -41,27 +35,31 @@ class Shop extends Model
 
     public static function searchShops($areaId = null, $genreId = null, $keyword = null)
     {
+        if (empty(self::$AREA_IDS) || empty(self::$GENRE_IDS)) {
+            self::initializeConstants();
+        }
+
         $query = self::select('id', 'name', 'area_id', 'genre_id', 'shop_image')
             ->with(['likes' => function ($query) {
                 $query->select('user_id', 'shop_id');
             }]);
 
-        if (!empty($areaId) && $areaId !== 'All area') {
-            $query->where('area_id', $areaId);
-        }
-
-        if (!empty($genreId) && $genreId !== 'All genre') {
-            $query->where('genre_id', $genreId);
-        }
-
-        if (!empty($keyword)) {
-            $query->where('name', 'LIKE', "%{$keyword}%");
-        }
+            if ($areaId && $areaId != 'All area') {
+                $query->where('area_id', $areaId);
+            }
+            
+            if ($genreId && $genreId != 'All genre') {
+                $query->where('genre_id', $genreId);
+            }
+            
+            if ($keyword) {
+                $query->where('name', 'LIKE', "%{$keyword}%");
+            }
 
         return $query->get()->map(function ($shop) {
             $shop->likes_user_id = $shop->likes->pluck('user_id')->first();
-            $shop->area_name = self::AREA_IDS[$shop->area_id];
-            $shop->genre_name = self::GENRE_IDS[$shop->genre_id];
+            $shop->area_name = self::$AREA_IDS[$shop->area_id];
+            $shop->genre_name = self::$GENRE_IDS[$shop->genre_id];
             return $shop;
         });
     }
