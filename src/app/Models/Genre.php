@@ -19,6 +19,5 @@ class Genre extends Model
     {
         return self::select('id', 'name')
             ->get();
-        return $genre;
     }
 }
