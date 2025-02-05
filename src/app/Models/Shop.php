@@ -19,15 +19,6 @@ class Shop extends Model
         'shop_image',
     ];
 
-    public static array $AREA_IDS = [];
-    public static array $GENRE_IDS = [];
-
-    public static function initializeConstants()
-    {
-        self::$AREA_IDS = Area::pluck('name', 'id')->toArray();
-        self::$GENRE_IDS = Genre::pluck('name', 'id')->toArray();
-    }
-
     public function likes()
     {
         return $this->hasMany(Like::class);
@@ -35,31 +26,35 @@ class Shop extends Model
 
     public static function searchShops($areaId = null, $genreId = null, $keyword = null)
     {
-        if (empty(self::$AREA_IDS) || empty(self::$GENRE_IDS)) {
-            self::initializeConstants();
-        }
-
-        $query = self::select('id', 'name', 'area_id', 'genre_id', 'shop_image')
+        $query = self::select(
+            'shops.id',
+            'shops.name',
+            'shops.area_id',
+            'areas.name as area_name',
+            'shops.genre_id',
+            'genres.name as genre_name',
+            'shops.shop_image'
+        )
+            ->join('areas', 'shops.area_id', '=', 'areas.id')
+            ->join('genres', 'shops.genre_id', '=', 'genres.id')
             ->with(['likes' => function ($query) {
                 $query->select('user_id', 'shop_id');
             }]);
 
-            if ($areaId && $areaId != 'All area') {
-                $query->where('area_id', $areaId);
-            }
-            
-            if ($genreId && $genreId != 'All genre') {
-                $query->where('genre_id', $genreId);
-            }
-            
-            if ($keyword) {
-                $query->where('name', 'LIKE', "%{$keyword}%");
-            }
+        if ($areaId && $areaId != 'All area') {
+            $query->where('shops.area_id', $areaId);
+        }
+
+        if ($genreId && $genreId != 'All genre') {
+            $query->where('shops.genre_id', $genreId);
+        }
+
+        if ($keyword) {
+            $query->where('shops.name', 'LIKE', "%{$keyword}%");
+        }
 
         return $query->get()->map(function ($shop) {
             $shop->likes_user_id = $shop->likes->pluck('user_id')->first();
-            $shop->area_name = self::$AREA_IDS[$shop->area_id];
-            $shop->genre_name = self::$GENRE_IDS[$shop->genre_id];
             return $shop;
         });
     }
