@@ -38,10 +38,6 @@
     text-decoration: none;
 }
 
-.card a:visited {
-    color: #000;
-}
-
 .card-content {
     padding: 15px 20px;
     text-align: left;
@@ -57,11 +53,23 @@
     color: inherit;
 }
 
+.card-content a:visited {
+    color: #000;
+}
+
 .card-buttons {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+}
+
+.card-buttons a:visited {
+    color: #FFF;
+}
+
+.card-buttons  {
+    color: #FFF;
 }
 
 .shop-detail {

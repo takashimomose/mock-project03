@@ -41,4 +41,12 @@ class ShopController extends Controller
 
         return redirect()->route('shop.index', $queryParams);
     }
+
+    public function detail($shop_id)
+    {
+        $shop = Shop::getShopDetail($shop_id);
+// dd($shop);
+
+        return view('shop_detail', compact('shop'));
+    }
 }

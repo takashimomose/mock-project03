@@ -45,29 +45,32 @@
                 <a href=""><span class="site-name">Rese</span></a>
             </h1>
             @auth
-                <form action="{{ route('shop.index') }}" method="GET">
-                    @csrf
-                    <div class="search-bar">
-                        <select name="area_id">
-                            <option>All area</option>
-                            @foreach ($areas as $area)
-                                <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
-                                    {{ $area->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <select name="genre_id">
-                            <option>All genre</option>
-                            @foreach ($genres as $genre)
-                                <option value="{{ $genre->id }}"
-                                    {{ request('genre_id') == $genre->id ? 'selected' : '' }}>
-                                    {{ $genre->name }}
-                            @endforeach
-                        </select>
-                        <button class="fa-solid fa-search"></button>
-                        <input type="text" name="keyword" placeholder="Search ..." value="{{ request('keyword') }}">
-                    </div>
-                </form>
+                @if (request()->routeIs('shop.index'))
+                    <form action="{{ route('shop.index') }}" method="GET">
+                        @csrf
+                        <div class="search-bar">
+                            <select name="area_id">
+                                <option>All area</option>
+                                @foreach ($areas as $area)
+                                    <option value="{{ $area->id }}"
+                                        {{ request('area_id') == $area->id ? 'selected' : '' }}>
+                                        {{ $area->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <select name="genre_id">
+                                <option>All genre</option>
+                                @foreach ($genres as $genre)
+                                    <option value="{{ $genre->id }}"
+                                        {{ request('genre_id') == $genre->id ? 'selected' : '' }}>
+                                        {{ $genre->name }}
+                                @endforeach
+                            </select>
+                            <button class="fa-solid fa-search"></button>
+                            <input type="text" name="keyword" placeholder="Search ..." value="{{ request('keyword') }}">
+                        </div>
+                    </form>
+                @endif
             @endauth
         </div>
     </header>
@@ -111,3 +114,29 @@
         });
     });
 </script>
+
+<script>
+    // 各要素の取得
+    const dateInput   = document.getElementById('dateInput');
+    const timeSelect  = document.getElementById('timeSelect');
+    const peopleSelect = document.getElementById('peopleSelect');
+
+    const dateTd   = document.getElementById('dateTd');
+    const timeTd   = document.getElementById('timeTd');
+    const peopleTd = document.getElementById('peopleTd');
+
+    // 選択/入力内容を<td>に表示する関数
+    function updateDisplay() {
+      dateTd.textContent   = dateInput.value;
+      timeTd.textContent   = timeSelect.value;
+      peopleTd.textContent = peopleSelect.value;
+    }
+
+    // 各要素の値が変わったタイミングでupdateDisplayを実行
+    dateInput.addEventListener('change', updateDisplay);
+    timeSelect.addEventListener('change', updateDisplay);
+    peopleSelect.addEventListener('change', updateDisplay);
+
+    // ページ読み込み時に初期表示も更新
+    updateDisplay();
+  </script>

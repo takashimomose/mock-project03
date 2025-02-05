@@ -19,6 +19,16 @@ class Shop extends Model
         'shop_image',
     ];
 
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+
     public static array $AREA_IDS = [];
     public static array $GENRE_IDS = [];
 
@@ -44,17 +54,17 @@ class Shop extends Model
                 $query->select('user_id', 'shop_id');
             }]);
 
-            if ($areaId && $areaId != 'All area') {
-                $query->where('area_id', $areaId);
-            }
-            
-            if ($genreId && $genreId != 'All genre') {
-                $query->where('genre_id', $genreId);
-            }
-            
-            if ($keyword) {
-                $query->where('name', 'LIKE', "%{$keyword}%");
-            }
+        if ($areaId && $areaId != 'All area') {
+            $query->where('area_id', $areaId);
+        }
+
+        if ($genreId && $genreId != 'All genre') {
+            $query->where('genre_id', $genreId);
+        }
+
+        if ($keyword) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        }
 
         return $query->get()->map(function ($shop) {
             $shop->likes_user_id = $shop->likes->pluck('user_id')->first();
@@ -62,5 +72,15 @@ class Shop extends Model
             $shop->genre_name = self::$GENRE_IDS[$shop->genre_id];
             return $shop;
         });
+    }
+
+    public static function getShopDetail($shopId)
+    {
+        $shop = self::with('area', 'genre')->findOrFail($shopId);
+
+        $shop->area_name = $shop->area->name;
+        $shop->genre_name = $shop->genre->name;
+
+        return $shop;
     }
 }

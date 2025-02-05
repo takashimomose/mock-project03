@@ -29,4 +29,5 @@ Route::group([], function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop.index');
     Route::post('/like/{shop_id}', [ShopController::class, 'like'])->name('shop.like');
+    Route::get('/{shop_id}', [ShopController::class, 'detail'])->name('shop.detail');
 });

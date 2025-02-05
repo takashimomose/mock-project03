@@ -26,37 +26,37 @@ class ShopsTableSeeder extends Seeder
         $shops = [
             [
                 'area_id' => self::AREA_IDS['TOKYO'],
-                'genre_id' => self::GENRE_IDS['ITALIAN'],
+                'genre_id' => self::GENRE_IDS['SUSHI'],
                 'name' => '仙人',
-                'description' => '料理長が厳選した食材を活かした本格イタリアン。',
+                'description' => '料理長厳選の食材から作る寿司を用いたコースをぜひお楽しみください。食材・味・価格、お客様の満足度を徹底的に追及したお店です。特別な日のお食事、ビジネス接待まで気軽に使用することができます。',
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
             ],
             [
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['YAKINIKU'],
                 'name' => '牛助',
-                'description' => '職人が丁寧に仕上げた和の逸品をお楽しみください。',
+                'description' => '焼肉業界で20年間経験を積み、肉を熟知したマスターによる実力派焼肉店。長年の実績とお付き合いをもとに、なかなか食べられない希少部位も仕入れております。また、ゆったりとくつろげる空間はお仕事終わりの一杯や女子会にぴったりです。',
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
             ],
             [
                 'area_id' => self::AREA_IDS['FUKUOKA'],
                 'genre_id' => self::GENRE_IDS['IZAKAYA'],
                 'name' => '戦慄',
-                'description' => '本場中国の味を忠実に再現した絶品中華料理をどうぞ。',
+                'description' => '気軽に立ち寄れる昔懐かしの大衆居酒屋です。キンキンに冷えたビールを、なんと199円で。鳥かわ煮込み串は販売総数100000本突破の名物料理です。仕事帰りに是非御来店ください。',
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
             ],
             [
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['ITALIAN'],
                 'name' => 'ルーク',
-                'description' => '都心にひっそりとたたずむ、古民家を改築した落ち着いた空間です。...',
+                'description' => '都心にひっそりとたたずむ、古民家を改築した落ち着いた空間です。イタリアで修業を重ねたシェフによるモダンなイタリア料理とソムリエセレクトによる厳選ワインとのペアリングが好評です。ゆっくりと上質な時間をお楽しみください。',
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg',
             ],
             [
                 'area_id' => self::AREA_IDS['FUKUOKA'],
                 'genre_id' => self::GENRE_IDS['RAMEN'],
                 'name' => '志摩屋',
-                'description' => 'ラーメン屋とは思えない店内にはカウンター席はもちろん、個室も用意してあります。...',
+                'description' => 'ラーメン屋とは思えない店内にはカウンター席はもちろん、個室も用意してあります。ラーメンはこってり系・あっさり系ともに揃っています。その他豊富な一品料理やアルコールも用意しており、居酒屋としても利用できます。ぜひご来店をお待ちしております。',
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
             ],
             [
