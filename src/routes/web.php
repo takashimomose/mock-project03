@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,9 @@ Route::group([], function () {
     Route::get('/login', [AuthController::class, 'show'])->name('auth.show');
     Route::post('/login', [AuthController::class, 'store'])->name('auth.store');
     Route::post('/logout', [AuthController::class, 'destroy'])->name('auth.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+    Route::post('/like/{shop_id}', [ShopController::class, 'like'])->name('shop.like');
 });

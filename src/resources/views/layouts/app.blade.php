@@ -44,12 +44,31 @@
                 </div>
                 <a href=""><span class="site-name">Rese</span></a>
             </h1>
-            <nav class="header-nav">
-                <ul class="header-nav-list">
-                    <ul class="header-nav-list">
-                    </ul>
-                </ul>
-            </nav>
+            @auth
+                <form action="{{ route('shop.index') }}" method="GET">
+                    @csrf
+                    <div class="search-bar">
+                        <select name="area_id">
+                            <option>All area</option>
+                            @foreach ($areas as $area)
+                                <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
+                                    {{ $area->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <select name="genre_id">
+                            <option>All genre</option>
+                            @foreach ($genres as $genre)
+                                <option value="{{ $genre->id }}"
+                                    {{ request('genre_id') == $genre->id ? 'selected' : '' }}>
+                                    {{ $genre->name }}
+                            @endforeach
+                        </select>
+                        <button class="fa-solid fa-search"></button>
+                        <input type="text" name="keyword" placeholder="Search ..." value="{{ request('keyword') }}">
+                    </div>
+                </form>
+            @endauth
         </div>
     </header>
     @yield('content')
