@@ -18,7 +18,17 @@ class Shop extends Model
         'description',
         'shop_image',
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
     
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+
     public function likes()
     {
         return $this->hasMany(Like::class);

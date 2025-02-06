@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Reservation;
 use App\Models\Shop;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +46,21 @@ class ShopController extends Controller
     public function detail($shop_id)
     {
         $shop = Shop::getShopDetail($shop_id);
-// dd($shop);
 
         return view('shop_detail', compact('shop'));
+    }
+
+    public function reserve(Request $request)
+    {
+        $user = Auth::user();
+
+        Reservation::createReservation($request, $user);
+
+        return redirect()->route('shop.done');
+    }
+
+    public function done()
+    {
+        return view('reservation_thanks');
     }
 }
