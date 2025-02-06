@@ -78,35 +78,29 @@
     <footer class="footer"></footer>
 </body>
 
-</html>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const toggleBtns = document.querySelectorAll('.toggle_btn'); // 全てのtoggle_btnを取得
+        const toggleBtns = document.querySelectorAll('.toggle_btn');
         const mask = document.getElementById('mask');
         const closeBtn = document.getElementById('close_btn');
-        const menuItems = document.querySelectorAll('.menu_item'); // メニューアイテムを選択
+        const menuItems = document.querySelectorAll('.menu_item');
 
-        // ハンバーガーメニューを開く
         toggleBtns.forEach(function(toggleBtn) {
             toggleBtn.addEventListener('click', function() {
                 mask.classList.add('open');
             });
         });
 
-        // 閉じるボタンを押すと閉じる
         closeBtn.addEventListener('click', function() {
             mask.classList.remove('open');
         });
 
-        // 背景をクリックしても閉じる
         mask.addEventListener('click', function(e) {
             if (e.target === mask) {
                 mask.classList.remove('open');
             }
         });
 
-        // メニューアイテムをクリックしても閉じる
         menuItems.forEach(function(item) {
             item.addEventListener('click', function() {
                 mask.classList.remove('open');
@@ -115,28 +109,6 @@
     });
 </script>
 
-<script>
-    // 各要素の取得
-    const dateInput   = document.getElementById('dateInput');
-    const timeSelect  = document.getElementById('timeSelect');
-    const peopleSelect = document.getElementById('peopleSelect');
+@stack('js')
 
-    const dateTd   = document.getElementById('dateTd');
-    const timeTd   = document.getElementById('timeTd');
-    const peopleTd = document.getElementById('peopleTd');
-
-    // 選択/入力内容を<td>に表示する関数
-    function updateDisplay() {
-      dateTd.textContent   = dateInput.value;
-      timeTd.textContent   = timeSelect.value;
-      peopleTd.textContent = peopleSelect.value;
-    }
-
-    // 各要素の値が変わったタイミングでupdateDisplayを実行
-    dateInput.addEventListener('change', updateDisplay);
-    timeSelect.addEventListener('change', updateDisplay);
-    peopleSelect.addEventListener('change', updateDisplay);
-
-    // ページ読み込み時に初期表示も更新
-    updateDisplay();
-  </script>
+</html>

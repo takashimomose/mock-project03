@@ -76,3 +76,27 @@
         </section>
     </main>
 @endsection
+
+@push('js')
+    <script>
+        const dateInput = document.getElementById('dateInput');
+        const timeSelect = document.getElementById('timeSelect');
+        const peopleSelect = document.getElementById('peopleSelect');
+
+        const dateTd = document.getElementById('dateTd');
+        const timeTd = document.getElementById('timeTd');
+        const peopleTd = document.getElementById('peopleTd');
+
+        function updateDisplay() {
+            dateTd.textContent = dateInput.value;
+            timeTd.textContent = timeSelect.value;
+            peopleTd.textContent = peopleSelect.value;
+        }
+
+        dateInput.addEventListener('change', updateDisplay);
+        timeSelect.addEventListener('change', updateDisplay);
+        peopleSelect.addEventListener('change', updateDisplay);
+
+        updateDisplay();
+    </script>
+@endpush
