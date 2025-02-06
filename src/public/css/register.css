@@ -8,7 +8,7 @@
 }
 
 .registration-section {
-    background: #fff;
+    background: #FFF;
     width: 350px;
     border-radius: 8px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
@@ -50,7 +50,7 @@
 
 .primary-btn {
     background: #2d64fb;
-    color: white;
+    color: #FFF;
     width: 23%;
     padding: 6px;
     border: none;
