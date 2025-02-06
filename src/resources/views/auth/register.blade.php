@@ -8,7 +8,7 @@
 
 @section('content')
     <main class="wrapper">
-        <section class="registraion-section">
+        <section class="registration-section">
             <div class="card-header">Registration</div>
             <div class="card-body">
                 <form method="POST" action="{{ route('register.store') }}" novalidate>
