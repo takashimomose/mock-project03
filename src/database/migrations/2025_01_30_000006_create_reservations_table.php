@@ -18,7 +18,7 @@ class CreateReservationsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('shop_id');
             $table->date('date');
-            $table->time('time')->nullable();
+            $table->time('time');
             $table->Integer('people');
             $table->timestamps();
 
