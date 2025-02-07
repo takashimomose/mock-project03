@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationRequest;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
@@ -50,7 +51,7 @@ class ShopController extends Controller
         return view('shop_detail', compact('shop'));
     }
 
-    public function reserve(Request $request)
+    public function reserve(ReservationRequest $request)
     {
         $user = Auth::user();
 
