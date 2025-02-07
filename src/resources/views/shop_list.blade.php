@@ -17,7 +17,7 @@
                         <a href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
                         <a href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
                         <div class="card-buttons">
-                            <button class="shop-detail">詳しくみる</button>
+                            <a href="{{ route('shop.index')}}/{{ $shop->id }}" class="shop-detail">詳しくみる</a>
                             <form action="{{ route('shop.like', ['shop_id' => $shop->id]) }}" method="POST">
                                 @csrf
                                 <button class="heart">

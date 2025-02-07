@@ -45,29 +45,32 @@
                 <a href=""><span class="site-name">Rese</span></a>
             </h1>
             @auth
-                <form action="{{ route('shop.index') }}" method="GET">
-                    @csrf
-                    <div class="search-bar">
-                        <select name="area_id">
-                            <option>All area</option>
-                            @foreach ($areas as $area)
-                                <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>
-                                    {{ $area->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <select name="genre_id">
-                            <option>All genre</option>
-                            @foreach ($genres as $genre)
-                                <option value="{{ $genre->id }}"
-                                    {{ request('genre_id') == $genre->id ? 'selected' : '' }}>
-                                    {{ $genre->name }}
-                            @endforeach
-                        </select>
-                        <button class="fa-solid fa-search"></button>
-                        <input type="text" name="keyword" placeholder="Search ..." value="{{ request('keyword') }}">
-                    </div>
-                </form>
+                @if (request()->routeIs('shop.index'))
+                    <form action="{{ route('shop.index') }}" method="GET">
+                        @csrf
+                        <div class="search-bar">
+                            <select name="area_id">
+                                <option>All area</option>
+                                @foreach ($areas as $area)
+                                    <option value="{{ $area->id }}"
+                                        {{ request('area_id') == $area->id ? 'selected' : '' }}>
+                                        {{ $area->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <select name="genre_id">
+                                <option>All genre</option>
+                                @foreach ($genres as $genre)
+                                    <option value="{{ $genre->id }}"
+                                        {{ request('genre_id') == $genre->id ? 'selected' : '' }}>
+                                        {{ $genre->name }}
+                                @endforeach
+                            </select>
+                            <button class="fa-solid fa-search"></button>
+                            <input type="text" name="keyword" placeholder="Search ..." value="{{ request('keyword') }}">
+                        </div>
+                    </form>
+                @endif
             @endauth
         </div>
     </header>
@@ -75,35 +78,29 @@
     <footer class="footer"></footer>
 </body>
 
-</html>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const toggleBtns = document.querySelectorAll('.toggle_btn'); // 全てのtoggle_btnを取得
+        const toggleBtns = document.querySelectorAll('.toggle_btn');
         const mask = document.getElementById('mask');
         const closeBtn = document.getElementById('close_btn');
-        const menuItems = document.querySelectorAll('.menu_item'); // メニューアイテムを選択
+        const menuItems = document.querySelectorAll('.menu_item');
 
-        // ハンバーガーメニューを開く
         toggleBtns.forEach(function(toggleBtn) {
             toggleBtn.addEventListener('click', function() {
                 mask.classList.add('open');
             });
         });
 
-        // 閉じるボタンを押すと閉じる
         closeBtn.addEventListener('click', function() {
             mask.classList.remove('open');
         });
 
-        // 背景をクリックしても閉じる
         mask.addEventListener('click', function(e) {
             if (e.target === mask) {
                 mask.classList.remove('open');
             }
         });
 
-        // メニューアイテムをクリックしても閉じる
         menuItems.forEach(function(item) {
             item.addEventListener('click', function() {
                 mask.classList.remove('open');
@@ -111,3 +108,7 @@
         });
     });
 </script>
+
+@stack('js')
+
+</html>

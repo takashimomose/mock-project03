@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Reservation;
 use App\Models\Shop;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
@@ -26,12 +27,12 @@ class ShopController extends Controller
         return view('shop_list', compact('shops', 'areas', 'genres'));
     }
 
-    public function like(Request $request, $shop_id)
+    public function like(Request $request, $shopId)
     {
 
         $userId = Auth::id();
 
-        Like::toggleLike($shop_id, $userId);
+        Like::toggleLike($shopId, $userId);
 
         $queryParams = $request->query();
 
@@ -40,5 +41,26 @@ class ShopController extends Controller
         }
 
         return redirect()->route('shop.index', $queryParams);
+    }
+
+    public function detail($shopId)
+    {
+        $shop = Shop::getShopDetail($shopId);
+
+        return view('shop_detail', compact('shop'));
+    }
+
+    public function reserve(Request $request)
+    {
+        $user = Auth::user();
+
+        Reservation::createReservation($request, $user);
+
+        return redirect()->route('shop.done');
+    }
+
+    public function done()
+    {
+        return view('reservation_thanks');
     }
 }

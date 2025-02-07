@@ -19,6 +19,16 @@ class Shop extends Model
         'shop_image',
     ];
 
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+    
+    public function genre()
+    {
+        return $this->belongsTo(Genre::class);
+    }
+
     public function likes()
     {
         return $this->hasMany(Like::class);
@@ -57,5 +67,15 @@ class Shop extends Model
             $shop->likes_user_id = $shop->likes->pluck('user_id')->first();
             return $shop;
         });
+    }
+
+    public static function getShopDetail($shopId)
+    {
+        $shop = self::with('area', 'genre')->findOrFail($shopId);
+
+        $shop->area_name = $shop->area->name;
+        $shop->genre_name = $shop->genre->name;
+
+        return $shop;
     }
 }
