@@ -27,12 +27,12 @@ class ShopController extends Controller
         return view('shop_list', compact('shops', 'areas', 'genres'));
     }
 
-    public function like(Request $request, $shop_id)
+    public function like(Request $request, $shopId)
     {
 
         $userId = Auth::id();
 
-        Like::toggleLike($shop_id, $userId);
+        Like::toggleLike($shopId, $userId);
 
         $queryParams = $request->query();
 
@@ -43,9 +43,9 @@ class ShopController extends Controller
         return redirect()->route('shop.index', $queryParams);
     }
 
-    public function detail($shop_id)
+    public function detail($shopId)
     {
-        $shop = Shop::getShopDetail($shop_id);
+        $shop = Shop::getShopDetail($shopId);
 
         return view('shop_detail', compact('shop'));
     }
