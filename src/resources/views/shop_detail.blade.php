@@ -18,15 +18,18 @@
                 <p>{{ $shop->description }}</p>
             </div>
             <div class="reservation-form">
-                <form action="{{ route('shop.reserve') }}" method="POST">
+                <form action="{{ route('shop.reserve') }}" method="POST" novalidate>
                     @csrf
                     <div class="reservation">
                         <h2>予約</h2>
                         <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                        <input id="dateInput" name="date" type="date"
-                            value="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d') }}"
+                        <input class="date" id="dateInput" name="date" type="date" value=""
                             min="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
+                        @error('date')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
                         <select id="timeSelect" name="time">
+                            <option value="" selected>Time</option>
                             <option value="11:00">11:00</option>
                             <option value="12:00">12:00</option>
                             <option value="13:00">13:00</option>
@@ -39,7 +42,11 @@
                             <option value="20:00">20:00</option>
                             <option value="21:00">21:00</option>
                         </select>
+                        @error('time')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
                         <select id="peopleSelect" name="people">
+                            <option value="" selected>Number</option>
                             <option value="1">1人</option>
                             <option value="2">2人</option>
                             <option value="3">3人</option>
@@ -51,6 +58,9 @@
                             <option value="9">9人</option>
                             <option value="10">10人</option>
                         </select>
+                        @error('people')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
                         <table class="reservation-table">
                             <tr>
                                 <th>Shop</th>
@@ -78,6 +88,22 @@
 @endsection
 
 @push('js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dateInput = document.getElementById("dateInput");
+
+            dateInput.addEventListener("focus", function() {
+                this.classList.remove("placeholder");
+            });
+
+            dateInput.addEventListener("blur", function() {
+                if (!this.value) {
+                    this.classList.add("placeholder");
+                }
+            });
+        });
+    </script>
+
     <script>
         const dateInput = document.getElementById('dateInput');
         const timeSelect = document.getElementById('timeSelect');
