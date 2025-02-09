@@ -27,8 +27,8 @@ class ReservationRequest extends FormRequest
             'date.after_or_equal' => '予約日は明日以降の日付を選択してください',
             'time.required' => '時間を入力してください',
             'people.required' => '人数を入力してください',
-            'people.integer' => '正しい人数を入力してください',
-            'people.min' => '正しい人数を入力してください',
+            'people.integer' => '人数は数字で入力してください',
+            'people.min' => '人数は1以上の数字で入力してください',
         ];
     }
 }
