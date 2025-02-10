@@ -164,6 +164,10 @@ body {
 
 @media (max-width: 768px) {
     .header-wrapper {
+        height: 80px;
+    }
+
+    .has-search-filter .header-wrapper  {
         display: block;
         height: 116px;
     }

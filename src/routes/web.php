@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::group([], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+    Route::get('/mypage', [CustomerController::class, 'show'])->name('customer.show');
     Route::post('/like/{shop_id}', [ShopController::class, 'like'])->name('shop.like');
     Route::post('/reserve', [ShopController::class, 'reserve'])->name('shop.reserve');
     Route::get('/done', [ShopController::class, 'done'])->name('shop.done');
