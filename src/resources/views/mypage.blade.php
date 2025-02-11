@@ -17,7 +17,7 @@
                                 <i class="fa-solid fa-clock"></i>
                                 <span class="reservation-order">予約{{ $loop->iteration }}</span>
                                 <form action="{{ route('reservation.delete', $reservation->id) }}" method="POST"
-                                    onsubmit="return confirm('本当に削除しますか？');">
+                                    onsubmit="return confirm('予約をキャンセルしますか？');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="delete-btn">
