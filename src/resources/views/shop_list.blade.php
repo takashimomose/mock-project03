@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ asset('css/shop_list.css') }}">
 @endpush
 
+@section('body-class', 'has-search-filter')
+
 @section('content')
     <main class="wrapper">
         <section class="shop-list-section">

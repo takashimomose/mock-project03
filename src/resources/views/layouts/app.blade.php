@@ -12,7 +12,7 @@
     @stack('css')
 </head>
 
-<body>
+<body class="@yield('body-class')">
     <header class="header">
         <div class="header-wrapper">
             <h1 class="header-logo">
