@@ -32,4 +32,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reserve', [ShopController::class, 'reserve'])->name('shop.reserve');
     Route::get('/done', [ShopController::class, 'done'])->name('shop.done');
     Route::get('/{shop_id}', [ShopController::class, 'detail'])->name('shop.detail');
+    Route::get('/shop/create', [ShopController::class, 'show'])->name('shop.show');
+    Route::post('/shop/store', [ShopController::class, 'store'])->name('shop.store');
 });

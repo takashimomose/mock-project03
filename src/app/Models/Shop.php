@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Shop extends Model
 {
@@ -23,7 +24,7 @@ class Shop extends Model
     {
         return $this->belongsTo(Area::class);
     }
-    
+
     public function genre()
     {
         return $this->belongsTo(Genre::class);
