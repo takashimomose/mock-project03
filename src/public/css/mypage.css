@@ -13,7 +13,6 @@
 
 .content-container {
     display: flex;
-    /* width: 100%; */
     justify-content: center;
 }
 
@@ -197,9 +196,4 @@
         width: 280px;
         margin-top: 30px;
     }
-
-    /* .reservation-card,
-    .card {
-        width: 100%;
-    } */
 }

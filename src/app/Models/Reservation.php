@@ -63,15 +63,8 @@ class Reservation extends Model
 
     public static function deleteReservation($reservationId, $user)
     {
-        $reservation = self::where('id', $reservationId)
+        return self::where('id', $reservationId)
             ->where('user_id', $user->id)
-            ->first();
-
-        if ($reservation) {
-            $reservation->delete();
-            return true;
-        }
-
-        return false;
+            ->delete();
     }
 }
