@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Shop extends Model
 {
@@ -24,6 +24,7 @@ class Shop extends Model
     {
         return $this->belongsTo(Area::class);
     }
+
 
     public function genre()
     {
@@ -50,7 +51,8 @@ class Shop extends Model
             ->join('genres', 'shops.genre_id', '=', 'genres.id')
             ->with(['likes' => function ($query) {
                 $query->select('user_id', 'shop_id');
-            }]);
+            }])
+            ->orderBy('shops.id', 'asc');
 
         if ($areaId && $areaId != 'All area') {
             $query->where('shops.area_id', $areaId);
@@ -65,7 +67,7 @@ class Shop extends Model
         }
 
         return $query->get()->map(function ($shop) {
-            $shop->likes_user_id = $shop->likes->pluck('user_id')->first();
+            $shop->likes_user_id = $shop->likes->where('user_id', Auth::id())->pluck('user_id')->first();
             return $shop;
         });
     }
