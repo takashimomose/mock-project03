@@ -14,13 +14,9 @@ class CustomerController extends Controller
 
         $userName = Auth::user()->name;
 
-        $reservations = Reservation::getReservation()->filter(function ($reservation) use ($userId) {
-            return $reservation->user_id === $userId;
-        });
+        $reservations = Reservation::getReservation()->where('user_id', $userId);
 
-        $likedShops = Shop::searchShops()->filter(function ($shop) use ($userId) {
-            return $shop->likes_user_id === $userId;
-        });
+        $likedShops = Shop::searchShops()->where('likes_user_id', $userId);
 
         return view('mypage', compact('reservations', 'likedShops', 'userName'));
     }
