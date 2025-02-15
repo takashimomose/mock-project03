@@ -90,7 +90,7 @@ class ShopController extends Controller
     public function tempUpload(Request $request)
     {
         $file = $request->file('shop_image');
-        $path = $file->store('temp_images', 'public');
+        $path = $file->store('shop_images', 'public');
 
         Session::put('shop_image_temp', $path);
 
