@@ -24,8 +24,7 @@
                     <label for="area" class="form-label">地域</label>
                     <div class="area-buttons">
                         @foreach ($areas as $area)
-                            <input type="radio" id="area_{{ $area->id }}" name="area" value="{{ $area->id }}"
-                                {{ old('area') == $area->id ? 'checked' : '' }}>
+                            <input type="radio" id="area_{{ $area->id }}" name="area" value="{{ $area->id }}" {{ old('area') == $area->id ? 'checked' : '' }}>
                             <label class="area-label" for="area_{{ $area->id }}">{{ $area->name }}</label>
                         @endforeach
                     </div>
@@ -58,20 +57,28 @@
 
                 <div class="shop-image-group">
                     <div class="shop-image-wrapper">
-                        <div class="image-preview"
-                            style="display: {{ Session::has('shop_image_temp') ? 'flex' : 'none' }};">
-                            @if (Session::has('shop_image_temp'))
+                        @if (Session::has('shop_image_temp'))
+                            <div class="image-preview" style="display: flex;">
                                 <img id="preview" src="{{ asset('storage/' . Session::get('shop_image_temp')) }}"
                                     alt="Image Preview">
+                            </div>
+                        @else
+                            <div class="image-preview" style="display: none;">
+                                <img id="preview" src="#" alt="Image Preview">
+                            </div>
+                        @endif
+
+                        <div class="image-buttons">
+                            <label for="shop-image" class="shop-image-upload">画像を選択</label>
+                            <input type="file" id="shop-image" name="shop_image" accept="image/*" style="display: none;">
+
+                            @if (Session::has('shop_image_temp'))
+                                <button type="button" class="delete-btn" id="delete-btn">画像を削除</button>
                             @else
-                                <img id="preview" src="#" alt="Image Preview" style="display: none;">
+                                <button type="button" class="delete-btn" id="delete-btn"
+                                    style="display: none;">画像を削除</button>
                             @endif
                         </div>
-                        <label for="shop-image" class="shop-image-upload">
-                            画像を選択する
-                        </label>
-                        <input type="file" id="shop-image" name="shop_image" accept="image/*" style="display: none;"
-                            onchange="previewImage(event)">
                     </div>
                 </div>
                 @error('shop_image')
@@ -79,25 +86,70 @@
                 @enderror
 
                 <div class="form-buttons">
-                    <button type="submit" class="cancel-btn" value="cancel">キャンセル</button>
+                    <a href="{{ route('shop.index') }}" class="cancel-btn">キャンセル</a>
                     <button type="submit" class="primary-btn" value='submit'>作成</button>
                 </div>
             </form>
         </section>
     </main>
-    {{-- 画像アップロード後のプレビュー表示 --}}
-    <script>
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const preview = document.getElementById('preview');
-                const imagePreviewWrapper = document.querySelector('.image-preview');
 
-                preview.src = reader.result;
-                preview.style.display = 'block';
-                imagePreviewWrapper.style.display = 'flex';
+    <script>
+        document.getElementById('shop-image').addEventListener('change', function(event) {
+            let fileInput = event.target;
+
+            if (!fileInput.files.length) {
+                return;
             }
-            reader.readAsDataURL(event.target.files[0]);
-        }
+
+            let file = fileInput.files[0];
+            let allowedTypes = ['image/jpeg', 'image/png'];
+            let fileType = file.type;
+
+            if (!allowedTypes.includes(fileType)) {
+                alert("JPGまたはPNG形式の画像ファイルをアップロードしてください。");
+                fileInput.value = "";
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append('shop_image', event.target.files[0]);
+            formData.append('_token', '{{ csrf_token() }}');
+
+            fetch("{{ route('shop.image-temp-upload') }}", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('preview').src = data.image_url;
+                        document.getElementById('preview').style.display = 'block';
+                        document.getElementById('delete-btn').style.display = 'block';
+                        document.querySelector('.image-preview').style.display = 'flex';
+                        fileInput.value = "";
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById("delete-btn").addEventListener("click", function() {
+            fetch("{{ route('shop.delete-image') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById("preview").style.display = "none";
+                        document.getElementById('delete-btn').style.display = 'none';
+                        document.querySelector('.image-preview').style.display = 'none';
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        });
     </script>
 @endsection

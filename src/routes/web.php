@@ -34,4 +34,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/{shop_id}', [ShopController::class, 'detail'])->name('shop.detail');
     Route::get('/shop/create', [ShopController::class, 'show'])->name('shop.show');
     Route::post('/shop/store', [ShopController::class, 'store'])->name('shop.store');
+    Route::post('/shop/image-temp-upload', [ShopController::class, 'tempUpload'])->name('shop.image-temp-upload');
+    Route::post('/shop/delete-image', [ShopController::class, 'deleteTempImage'])->name('shop.delete-image');
 });
