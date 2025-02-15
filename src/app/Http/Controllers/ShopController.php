@@ -43,6 +43,14 @@ class ShopController extends Controller
             $queryParams = session()->get('shop_search_params', []);
         }
 
+        $previousUrl = url()->previous();
+
+        $mypageUrl = route('customer.show');
+
+        if ($previousUrl === $mypageUrl) {
+            return redirect()->route('customer.show');
+        }
+
         return redirect()->route('shop.index', $queryParams);
     }
 
