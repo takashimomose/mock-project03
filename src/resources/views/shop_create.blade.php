@@ -87,7 +87,7 @@
                 @enderror
 
                 <div class="form-buttons">
-                    <a href="{{ route('shop.index') }}" class="cancel-btn">キャンセル</a>
+                    <a href="" class="cancel-btn">キャンセル</a>
                     <button type="submit" class="primary-btn" value='submit'>作成</button>
                 </div>
             </form>
