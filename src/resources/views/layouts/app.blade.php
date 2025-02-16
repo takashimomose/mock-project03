@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', '')</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/common.css') }}" />
@@ -20,26 +21,42 @@
                 <div id="mask">
                     <button id="close_btn" class="close_btn">×</button>
                     <nav id="navi" class="nav-wrapper">
-                        @guest
+                        @if (Route::currentRouteName() === 'auth.showOwner')
                             <ul class="menu">
                                 <li class="menu_item"><a href="">HOME</a></li>
-                                <li class="menu_item"><a href="{{ route('register.show') }}">Registration</a></li>
-                                <li class="menu_item"><a href="{{ route('auth.store') }}">Login</a></li>
+                                <li class="menu_item"><a href="{{ route('auth.showOwner') }}">Login</a></li>
                             </ul>
-                        @endguest
-
-                        @auth
-                            <ul class="menu">
-                                <li class="menu_item"><a href="">HOME</a></li>
-                                <li class="menu_item">
-                                    <form action="{{ route('auth.destroy') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="logout-button">Logout</button>
-                                    </form>
-                                </li>
-                                <li class="menu_item"><a href="">MyPage</a></li>
-                            </ul>
-                        @endauth
+                        @else
+                            @auth
+                                @if (Auth::user()->role_id == \App\Models\User::ROLE_GENERAL)
+                                    <ul class="menu">
+                                        <li class="menu_item"><a href="{{ route('shop.index') }}">HOME</a></li>
+                                        <li class="menu_item">
+                                            <form action="{{ route('auth.destroy') }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="logout-button">Logout</button>
+                                            </form>
+                                        </li>
+                                        <li class="menu_item"><a href="{{ route('customer.show') }}">MyPage</a></li>
+                                    </ul>
+                                @elseif (Auth::user()->role_id == \App\Models\User::ROLE_OWNER)
+                                    <ul class="menu">
+                                        <li class="menu_item"><a href="">HOME</a></li>
+                                        <li class="menu_item">
+                                            <form action="{{ route('auth.destroyOwner') }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="logout-button">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                @endif
+                            @else
+                                <ul class="menu">
+                                    <li class="menu_item"><a href="{{ route('register.show') }}">Registration</a></li>
+                                    <li class="menu_item"><a href="{{ route('auth.store') }}">Login</a></li>
+                                </ul>
+                            @endauth
+                        @endif
                     </nav>
                 </div>
                 <a href=""><span class="site-name">Rese</span></a>
@@ -76,6 +93,7 @@
     </header>
     @yield('content')
     <footer class="footer"></footer>
+    @stack('scripts')
 </body>
 
 <script>

@@ -75,7 +75,7 @@ class ShopController extends Controller
         return view('reservation_thanks');
     }
 
-    public function show()
+    public function create()
     {
         if (!Session::has('errors')) {
             Session::forget('shop_image_temp');
@@ -87,7 +87,7 @@ class ShopController extends Controller
         return view('shop_create', compact('areas', 'genres'));
     }
 
-    public function tempUpload(Request $request)
+    public function uploadTempImage(Request $request)
     {
         $file = $request->file('shop_image');
         $path = $file->store('shop_images', 'public');
@@ -104,13 +104,13 @@ class ShopController extends Controller
         $data['area_id'] = $data['area'];
         $data['genre_id'] = $data['genre'];
         unset($data['area'], $data['genre']);
+        $data['user_id'] = Auth::id();
 
         if ($request->hasFile('shop_image')) {
             $path = $request->file('shop_image')->store('shop_images', 'public');
             $data['shop_image'] = $path;
             Session::put('shop_image_temp', $path);
         } elseif (Session::has('shop_image_temp')) {
-
             $data['shop_image'] = Session::get('shop_image_temp');
         }
 
@@ -118,7 +118,7 @@ class ShopController extends Controller
 
         Session::forget('shop_image_temp');
 
-        return redirect()->route('shop.index');
+        return redirect()->route('shop.create', ['success' => 'true']);
     }
 
     public function deleteTempImage()

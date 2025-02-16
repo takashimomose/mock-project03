@@ -28,7 +28,7 @@ Route::group([], function () {
     Route::post('/logout', [AuthController::class, 'destroy'])->name('auth.destroy');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'check.role:general'])->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop.index');
     Route::get('/mypage', [CustomerController::class, 'show'])->name('customer.show');
     Route::post('/like/{shop_id}', [ShopController::class, 'like'])->name('shop.like');
@@ -36,8 +36,15 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/reserve/{reservation_id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
     Route::get('/done', [ShopController::class, 'done'])->name('shop.done');
     Route::get('/{shop_id}', [ShopController::class, 'detail'])->name('shop.detail');
-    Route::get('/shop/create', [ShopController::class, 'show'])->name('shop.show');
+});
+
+Route::prefix('owner')->middleware('check.role:owner')->group(function () {
+    Route::get('/login', [AuthController::class, 'showOwner'])->name('auth.showOwner');
+    Route::post('/login', [AuthController::class, 'storeOwner'])->name('auth.storeOwner');
+    Route::post('/logout', [AuthController::class, 'destroyOwner'])->name('auth.destroyOwner');
+    
+    Route::get('/shop/create', [ShopController::class, 'create'])->name('shop.create');
     Route::post('/shop/store', [ShopController::class, 'store'])->name('shop.store');
-    Route::post('/shop/image-temp-upload', [ShopController::class, 'tempUpload'])->name('shop.image-temp-upload');
-    Route::post('/shop/delete-image', [ShopController::class, 'deleteTempImage'])->name('shop.delete-image');
+    Route::post('/shop/upload-temp-image', [ShopController::class, 'uploadTempImage'])->name('shop.uploadTempImage');
+    Route::post('/shop/delete-temp-image', [ShopController::class, 'deleteTempImage'])->name('shop.deleteTempImage');
 });

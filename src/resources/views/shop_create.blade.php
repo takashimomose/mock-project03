@@ -24,7 +24,8 @@
                     <label for="area" class="form-label">地域</label>
                     <div class="area-buttons">
                         @foreach ($areas as $area)
-                            <input type="radio" id="area_{{ $area->id }}" name="area" value="{{ $area->id }}" {{ old('area') == $area->id ? 'checked' : '' }}>
+                            <input type="radio" id="area_{{ $area->id }}" name="area" value="{{ $area->id }}"
+                                {{ old('area') == $area->id ? 'checked' : '' }}>
                             <label class="area-label" for="area_{{ $area->id }}">{{ $area->name }}</label>
                         @endforeach
                     </div>
@@ -90,66 +91,12 @@
                     <button type="submit" class="primary-btn" value='submit'>作成</button>
                 </div>
             </form>
+            @include('components.complete_modal')
         </section>
     </main>
-
-    <script>
-        document.getElementById('shop-image').addEventListener('change', function(event) {
-            let fileInput = event.target;
-
-            if (!fileInput.files.length) {
-                return;
-            }
-
-            let file = fileInput.files[0];
-            let allowedTypes = ['image/jpeg', 'image/png'];
-            let fileType = file.type;
-
-            if (!allowedTypes.includes(fileType)) {
-                alert("JPGまたはPNG形式の画像ファイルをアップロードしてください。");
-                fileInput.value = "";
-                return;
-            }
-
-            let formData = new FormData();
-            formData.append('shop_image', event.target.files[0]);
-            formData.append('_token', '{{ csrf_token() }}');
-
-            fetch("{{ route('shop.image-temp-upload') }}", {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById('preview').src = data.image_url;
-                        document.getElementById('preview').style.display = 'block';
-                        document.getElementById('delete-btn').style.display = 'block';
-                        document.querySelector('.image-preview').style.display = 'flex';
-                        fileInput.value = "";
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
-
-        document.getElementById("delete-btn").addEventListener("click", function() {
-            fetch("{{ route('shop.delete-image') }}", {
-                    method: "POST",
-                    headers: {
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({})
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        document.getElementById("preview").style.display = "none";
-                        document.getElementById('delete-btn').style.display = 'none';
-                        document.querySelector('.image-preview').style.display = 'none';
-                    }
-                })
-                .catch(error => console.error("Error:", error));
-        });
-    </script>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('js/shop_image_upload.js') }}"></script>
+<script src="{{ asset('js/complete_modal.js') }}"></script>
+@endpush
