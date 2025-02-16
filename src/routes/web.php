@@ -25,11 +25,11 @@ Route::group([], function () {
 
     Route::get('/login', [AuthController::class, 'show'])->name('auth.show');
     Route::post('/login', [AuthController::class, 'store'])->name('auth.store');
-    Route::post('/logout', [AuthController::class, 'destroy'])->name('auth.destroy');
 });
 
 Route::middleware(['auth', 'check.role:general'])->group(function () {
     Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+    Route::post('/logout', [AuthController::class, 'destroy'])->name('auth.destroy');
     Route::get('/mypage', [CustomerController::class, 'show'])->name('customer.show');
     Route::post('/like/{shop_id}', [ShopController::class, 'like'])->name('shop.like');
     Route::post('/reserve', [ShopController::class, 'reserve'])->name('shop.reserve');
