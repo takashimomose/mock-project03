@@ -41,8 +41,10 @@ Route::middleware(['auth', 'check.role:general'])->group(function () {
 Route::prefix('owner')->middleware('check.role:owner')->group(function () {
     Route::get('/login', [AuthController::class, 'showOwner'])->name('auth.showOwner');
     Route::post('/login', [AuthController::class, 'storeOwner'])->name('auth.storeOwner');
+});
+
+Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function () {
     Route::post('/logout', [AuthController::class, 'destroyOwner'])->name('auth.destroyOwner');
-    
     Route::get('/shop/create', [ShopController::class, 'create'])->name('shop.create');
     Route::post('/shop/store', [ShopController::class, 'store'])->name('shop.store');
     Route::post('/shop/upload-temp-image', [ShopController::class, 'uploadTempImage'])->name('shop.uploadTempImage');
