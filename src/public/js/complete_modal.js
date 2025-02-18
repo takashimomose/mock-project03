@@ -1,11 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search);
     if (params.has("success")) {
-        document.getElementById("modal-overlay").style.display = "flex";
+        const modalOverlay = document.getElementById("modal-overlay");
+        modalOverlay.style.display = "flex";
     }
-
-    document.getElementById("close-modal").addEventListener("click", function() {
-        document.getElementById("modal-overlay").style.display = "none";
-        history.replaceState({}, document.title, window.location.pathname);
-    });
 });
