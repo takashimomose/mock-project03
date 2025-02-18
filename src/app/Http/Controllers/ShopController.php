@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
+use App\Http\Requests\ShopCreateRequest;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
 use App\Models\Shop;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -71,5 +73,63 @@ class ShopController extends Controller
     public function done()
     {
         return view('reservation_thanks');
+    }
+
+    public function create()
+    {
+        if (!Session::has('errors')) {
+            Session::forget('shop_image_temp');
+        }
+
+        $areas = Area::getAreas();
+        $genres = Genre::getGenres();
+
+        return view('shop_create', compact('areas', 'genres'));
+    }
+
+    public function uploadTempImage(Request $request)
+    {
+        $file = $request->file('shop_image');
+        $path = $file->store('shop_images', 'public');
+
+        Session::put('shop_image_temp', $path);
+
+        return response()->json(['success' => true, 'image_url' => asset('storage/' . $path)]);
+    }
+
+    public function store(ShopCreateRequest $request)
+    {
+        $data = $request->only(['name', 'area', 'genre', 'description', 'shop_image']);
+        $userId = Auth::id();
+
+        $area = Area::createArea($data['area'], $userId);
+        $genre = Genre::createGenre($data['genre'], $userId);
+
+        $data['area_id'] = $area->id;
+        $data['genre_id'] = $genre->id;
+        unset($data['area'], $data['genre']);
+        $data['user_id'] = $userId;
+
+        if ($request->hasFile('shop_image')) {
+            $path = $request->file('shop_image')->store('shop_images', 'public');
+            $data['shop_image'] = $path;
+            Session::put('shop_image_temp', $path);
+        } elseif (Session::has('shop_image_temp')) {
+            $data['shop_image'] = Session::get('shop_image_temp');
+        }
+
+        Shop::createShop($data);
+
+        Session::forget('shop_image_temp');
+
+        return redirect()->route('shop.create', ['success' => 'true']);
+    }
+
+
+    public function deleteTempImage()
+    {
+        Session::forget('shop_image_temp');
+
+        return response()->json(['success' => true]);
     }
 }

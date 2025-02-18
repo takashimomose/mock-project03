@@ -13,6 +13,7 @@ class Shop extends Model
     protected $table = 'shops';
 
     protected $fillable = [
+        'user_id',
         'area_id',
         'genre_id',
         'name',
@@ -79,5 +80,10 @@ class Shop extends Model
         $shop->genre_name = $shop->genre->name;
 
         return $shop;
+    }
+
+    public static function createShop(array $data)
+    {
+        return self::create($data);
     }
 }

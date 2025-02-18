@@ -12,6 +12,7 @@ class Genre extends Model
     protected $table = 'genres';
 
     protected $fillable = [
+        'user_id',
         'name',
     ];
 
@@ -19,5 +20,13 @@ class Genre extends Model
     {
         return self::select('id', 'name')
             ->get();
+    }
+
+    public static function createGenre(string $name, int $userId): Genre
+    {
+        return self::create([
+            'name' => $name,
+            'user_id' => $userId,
+        ]);
     }
 }

@@ -12,6 +12,7 @@ class Area extends Model
     protected $table = 'areas';
 
     protected $fillable = [
+        'user_id',
         'name',
     ];
 
@@ -19,5 +20,13 @@ class Area extends Model
     {
         return self::select('id', 'name')
             ->get();
+    }
+
+    public static function createArea(string $name, int $userId): Area
+    {
+        return self::create([
+            'name' => $name,
+            'user_id' => $userId,
+        ]);
     }
 }

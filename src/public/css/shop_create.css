@@ -1,0 +1,137 @@
+.wrapper {
+    margin: 0 auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.shop-create-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 16px;
+    max-width: 1200px;
+    flex-direction: column;
+}
+
+.shop-create-section h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    width: 500px;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.form-textarea {
+    width: 100%;
+    height: 150px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.shop-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: dotted 1px #5F5F5F;
+    width: 100%;
+    height: 250px;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.image-preview {
+    display: flex;
+    background-color: #000;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 150px;
+}
+
+.image-preview img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.shop-image-upload {
+    display: inline-block;
+    padding: 8px 20px;
+    background: #5580F7;
+    color: #FFF;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.image-buttons {
+    display: flex;
+    justify-content: space-between; 
+    gap: 30px;
+}
+
+.delete-btn {
+    display: block;
+    padding: 8px 20px;
+    background: #FFB6BB;
+    color: #FFF;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+}
+
+.shop-image-upload:hover, .delete-btn:hover {
+    opacity: 0.7;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.form-buttons button {
+    display: inline-block;
+} 
+
+.cancel-btn, .primary-btn {
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    margin: 30px 0 20px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    color: #5580F7;
+    background: #FFF;
+    border: 2px solid #5580F7;
+    text-align: center;
+    text-decoration: none;
+}
+
+.primary-btn {
+    color: #FFF;
+    background: #5580F7;
+    border: none;
+}

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class ShopsTableSeeder extends Seeder
 {
+    const USER_ID = ['OWNER' => 2,];
+
     const AREA_IDS = [
         'TOKYO' => 1,
         'OSAKA' => 2,
@@ -25,6 +27,7 @@ class ShopsTableSeeder extends Seeder
     {
         $shops = [
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['SUSHI'],
                 'name' => '仙人',
@@ -32,6 +35,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['YAKINIKU'],
                 'name' => '牛助',
@@ -39,6 +43,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['FUKUOKA'],
                 'genre_id' => self::GENRE_IDS['IZAKAYA'],
                 'name' => '戦慄',
@@ -46,6 +51,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['ITALIAN'],
                 'name' => 'ルーク',
@@ -53,6 +59,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['FUKUOKA'],
                 'genre_id' => self::GENRE_IDS['RAMEN'],
                 'name' => '志摩屋',
@@ -60,6 +67,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['YAKINIKU'],
                 'name' => '香',
@@ -67,6 +75,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['RAMEN'],
                 'name' => 'JJ',
@@ -74,6 +83,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['RAMEN'],
                 'name' => 'らーめん極み',
@@ -81,6 +91,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['IZAKAYA'],
                 'name' => '鳥雨',
@@ -88,6 +99,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['SUSHI'],
                 'name' => '築地色合',
@@ -95,6 +107,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['YAKINIKU'],
                 'name' => '晴海',
@@ -102,6 +115,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['FUKUOKA'],
                 'genre_id' => self::GENRE_IDS['YAKINIKU'],
                 'name' => '三子',
@@ -109,6 +123,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['IZAKAYA'],
                 'name' => '八戒',
@@ -116,6 +131,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['SUSHI'],
                 'name' => '福助',
@@ -123,6 +139,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['RAMEN'],
                 'name' => 'ラー北',
@@ -130,6 +147,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/ramen.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['IZAKAYA'],
                 'name' => '翔',
@@ -137,6 +155,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['SUSHI'],
                 'name' => '経緯',
@@ -144,6 +163,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['TOKYO'],
                 'genre_id' => self::GENRE_IDS['YAKINIKU'],
                 'name' => '漆',
@@ -151,6 +171,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['FUKUOKA'],
                 'genre_id' => self::GENRE_IDS['ITALIAN'],
                 'name' => 'THE TOOL',
@@ -158,6 +179,7 @@ class ShopsTableSeeder extends Seeder
                 'shop_image' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg',
             ],
             [
+                'user_id' => self::USER_ID['OWNER'],
                 'area_id' => self::AREA_IDS['OSAKA'],
                 'genre_id' => self::GENRE_IDS['SUSHI'],
                 'name' => '木船',
