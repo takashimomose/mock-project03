@@ -100,11 +100,15 @@ class ShopController extends Controller
     public function store(ShopCreateRequest $request)
     {
         $data = $request->only(['name', 'area', 'genre', 'description', 'shop_image']);
+        $userId = Auth::id();
 
-        $data['area_id'] = $data['area'];
-        $data['genre_id'] = $data['genre'];
+        $area = Area::createArea($data['area'], $userId);
+        $genre = Genre::createGenre($data['genre'], $userId);
+
+        $data['area_id'] = $area->id;
+        $data['genre_id'] = $genre->id;
         unset($data['area'], $data['genre']);
-        $data['user_id'] = Auth::id();
+        $data['user_id'] = $userId;
 
         if ($request->hasFile('shop_image')) {
             $path = $request->file('shop_image')->store('shop_images', 'public');
@@ -114,12 +118,13 @@ class ShopController extends Controller
             $data['shop_image'] = Session::get('shop_image_temp');
         }
 
-        Shop::create($data);
+        Shop::createShop($data);
 
         Session::forget('shop_image_temp');
 
         return redirect()->route('shop.create', ['success' => 'true']);
     }
+
 
     public function deleteTempImage()
     {

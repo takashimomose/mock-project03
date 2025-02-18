@@ -27,10 +27,8 @@
     margin-bottom: 5px;
 }
 
-.area-buttons,
-.genre-buttons {
-    display: inline-block;
-    margin: 0 auto 0 auto;
+.form-group {
+    width: 500px;
 }
 
 .form-input {
@@ -104,33 +102,6 @@
     opacity: 0.7;
 }
 
-.area-label,
-.genre-label {
-    padding: 5px 20px;
-    margin: 5px;
-    border: 2px solid #5580F7;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
-    background: #f8f9fa;
-    color: #5580F7;
-    font-size: 15px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.area-label:hover,
-.genre-label:hover,
-input[type="radio"]:checked+.area-label,
-input[type="radio"]:checked+.genre-label {
-    background: #5580F7;
-    color: #fff;
-}
-
-input[type="radio"] {
-    display: none;
-}
-
 .form-buttons {
     display: flex;
     justify-content: space-between;
@@ -139,7 +110,7 @@ input[type="radio"] {
 
 .form-buttons button {
     display: inline-block;
-}
+} 
 
 .cancel-btn, .primary-btn {
     width: 50%;

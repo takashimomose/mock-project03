@@ -59,7 +59,7 @@ class AuthController extends Controller
         return view('auth.owner_login');
     }
 
-    public function storeOwner(Authrequest $request)
+    public function storeOwner(AuthRequest $request)
     {
         $credentials = $request->validated();
 

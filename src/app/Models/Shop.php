@@ -26,7 +26,6 @@ class Shop extends Model
         return $this->belongsTo(Area::class);
     }
 
-
     public function genre()
     {
         return $this->belongsTo(Genre::class);
@@ -81,5 +80,10 @@ class Shop extends Model
         $shop->genre_name = $shop->genre->name;
 
         return $shop;
+    }
+
+    public static function createShop(array $data)
+    {
+        return self::create($data);
     }
 }

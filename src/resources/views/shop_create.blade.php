@@ -14,21 +14,16 @@
                 @csrf
                 <div class="form-group">
                     <label for="name" class="form-label">店舗名</label>
-                    <input class="form-input" type="text" name="name" placeholder=""
+                    <input class="form-input" type="text" name="name" placeholder="店舗を入力"
                         value="{{ old('name', $oldData['name'] ?? '') }}">
                 </div>
                 @error('name')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
+
                 <div class="form-group">
                     <label for="area" class="form-label">地域</label>
-                    <div class="area-buttons">
-                        @foreach ($areas as $area)
-                            <input type="radio" id="area_{{ $area->id }}" name="area" value="{{ $area->id }}"
-                                {{ old('area') == $area->id ? 'checked' : '' }}>
-                            <label class="area-label" for="area_{{ $area->id }}">{{ $area->name }}</label>
-                        @endforeach
-                    </div>
+                    <input class="form-input" type="text" name="area" value="{{ old('area', $oldData['area'] ?? '') }}" placeholder="エリアを入力">
                 </div>
                 @error('area')
                     <div class="error-message">{{ $message }}</div>
@@ -36,13 +31,7 @@
 
                 <div class="form-group">
                     <label for="genre" class="form-label">ジャンル</label>
-                    <div class="genre-buttons">
-                        @foreach ($genres as $genre)
-                            <input type="radio" id="genre_{{ $genre->id }}" name="genre"
-                                value="{{ $genre->id }}" {{ old('genre') == $genre->id ? 'checked' : '' }}>
-                            <label class="genre-label" for="genre_{{ $genre->id }}">{{ $genre->name }}</label>
-                        @endforeach
-                    </div>
+                    <input class="form-input" type="text" name="genre" value="{{ old('genre', $oldData['genre'] ?? '') }}" placeholder="ジャンルを入力">
                 </div>
                 @error('genre')
                     <div class="error-message">{{ $message }}</div>
@@ -50,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="description" class="form-label">店舗概要</label>
-                    <textarea class="form-textarea" name="description">{{ old('description', $oldData['description'] ?? '') }}</textarea>
+                    <textarea class="form-textarea" name="description" placeholder="店舗概要を入力">{{ old('description', $oldData['description'] ?? '') }}</textarea>
                 </div>
                 @error('description')
                     <div class="error-message">{{ $message }}</div>
