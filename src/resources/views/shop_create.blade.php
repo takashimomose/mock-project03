@@ -14,7 +14,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="name" class="form-label">店舗名</label>
-                    <input class="form-input" type="text" name="name" placeholder="店舗を入力"
+                    <input class="form-input" type="text" name="name" placeholder="店舗名を入力"
                         value="{{ old('name', $oldData['name'] ?? '') }}">
                 </div>
                 @error('name')
@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label for="area" class="form-label">地域</label>
-                    <input class="form-input" type="text" name="area" value="{{ old('area', $oldData['area'] ?? '') }}" placeholder="エリアを入力">
+                    <input class="form-input" type="text" name="area" value="{{ old('area', $oldData['area'] ?? '') }}" placeholder="地域を入力">
                 </div>
                 @error('area')
                     <div class="error-message">{{ $message }}</div>
