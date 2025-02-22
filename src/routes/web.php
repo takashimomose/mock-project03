@@ -49,4 +49,5 @@ Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function
     Route::post('/shop/store', [ShopController::class, 'store'])->name('shop.store');
     Route::post('/shop/upload-temp-image', [ShopController::class, 'uploadTempImage'])->name('shop.uploadTempImage');
     Route::post('/shop/delete-temp-image', [ShopController::class, 'deleteTempImage'])->name('shop.deleteTempImage');
+    Route::get('/shop/list', [ShopController::class, 'list'])->name('shop.list');
 });

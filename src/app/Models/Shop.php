@@ -45,7 +45,9 @@ class Shop extends Model
             'areas.name as area_name',
             'shops.genre_id',
             'genres.name as genre_name',
-            'shops.shop_image'
+            'shops.shop_image',
+            'shops.created_at',
+            'shops.updated_at',
         )
             ->join('areas', 'shops.area_id', '=', 'areas.id')
             ->join('genres', 'shops.genre_id', '=', 'genres.id')
@@ -66,10 +68,7 @@ class Shop extends Model
             $query->where('shops.name', 'LIKE', "%{$keyword}%");
         }
 
-        return $query->get()->map(function ($shop) {
-            $shop->likes_user_id = $shop->likes->where('user_id', Auth::id())->pluck('user_id')->first();
-            return $shop;
-        });
+        return $query;
     }
 
     public static function getShopDetail($shopId)
