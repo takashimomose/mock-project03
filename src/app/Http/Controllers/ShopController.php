@@ -143,7 +143,7 @@ class ShopController extends Controller
         $userId = Auth::id();
         $shops = Shop::searchShops()
             ->paginate(self::ITEMS_PER_PAGE);
-        // dd($shops);
+            
         return view('owner_shop_list', compact('shops'));
     }
 }

@@ -69,12 +69,13 @@
 .shop-table td {
     border: 1px solid #ddd;
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
 
 .shop-table th {
     background-color: #3560F6;
     color: #FFF;
+    white-space: nowrap;
 }
 
 .edit-btn {
@@ -141,6 +142,7 @@
         margin-bottom: 10px;
         border: 1px solid #ddd;
         padding: 10px;
+        margin-bottom: 40px;
     }
 
     .shop-table th {
@@ -152,10 +154,12 @@
         width: auto !important;
         justify-content: space-between;
         padding: 10px;
+        text-align: right;
     }
 
     .shop-table td::before {
         content: attr(data-label);
         font-weight: bold;
+        white-space: nowrap;
     }
 }
