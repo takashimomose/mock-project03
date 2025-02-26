@@ -15,13 +15,19 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    private const ITEMS_PER_PAGE = 20;
+
     public function index(Request $request)
     {
         $areaId = $request->input('area_id');
         $genreId = $request->input('genre_id');
         $keyword = $request->input('keyword');
 
-        $shops = Shop::searchShops($areaId, $genreId, $keyword);
+        $shops = Shop::searchShops($areaId, $genreId, $keyword)->get()->map(function ($shop) {
+            $shop->likes_user_id = $shop->likes->where('user_id', Auth::id())->pluck('user_id')->first();
+            return $shop;
+        });
+
         $areas = Area::getAreas();
         $genres = Genre::getGenres();
 
@@ -125,11 +131,19 @@ class ShopController extends Controller
         return redirect()->route('shop.create', ['success' => 'true']);
     }
 
-
     public function deleteTempImage()
     {
         Session::forget('shop_image_temp');
 
         return response()->json(['success' => true]);
+    }
+
+    public function list()
+    {
+        $userId = Auth::id();
+        $shops = Shop::searchShops()
+            ->paginate(self::ITEMS_PER_PAGE);
+            
+        return view('owner_shop_list', compact('shops'));
     }
 }
