@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ShopController;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,4 +51,5 @@ Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function
     Route::post('/shop/upload-temp-image', [ShopController::class, 'uploadTempImage'])->name('shop.uploadTempImage');
     Route::post('/shop/delete-temp-image', [ShopController::class, 'deleteTempImage'])->name('shop.deleteTempImage');
     Route::get('/shop/list', [ShopController::class, 'list'])->name('shop.list');
+    Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');
 });
