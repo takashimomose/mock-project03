@@ -46,4 +46,31 @@ class User extends Authenticatable
     const ROLE_ADMIN = 1;
     const ROLE_OWNER = 2;
     const ROLE_GENERAL = 3;
+
+    public static function getUsers()
+    {
+        $query = self::select(
+            'users.id',
+            'roles.role_name as role_name',
+            'users.name',
+            'users.email',
+            'users.password',
+            'users.created_at'
+        )
+            ->join('roles', 'users.role_id', '=', 'roles.id')
+            ->orderBy('users.id', 'asc');
+
+        return $query;
+    }
+
+    public static function deleteOwner($userId)
+    {
+        $owner= self::find($userId);
+
+        if ($owner) {
+            return $owner->delete();
+        }
+
+        return false;
+    }
 }

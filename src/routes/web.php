@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -50,4 +51,17 @@ Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function
     Route::post('/shop/upload-temp-image', [ShopController::class, 'uploadTempImage'])->name('shop.uploadTempImage');
     Route::post('/shop/delete-temp-image', [ShopController::class, 'deleteTempImage'])->name('shop.deleteTempImage');
     Route::get('/shop/list', [ShopController::class, 'list'])->name('shop.list');
+});
+
+Route::prefix('admin')->middleware('check.role:admin')->group(function () {
+    Route::get('/login', [AuthController::class, 'showAdmin'])->name('auth.showAdmin');
+    Route::post('/login', [AuthController::class, 'storeAdmin'])->name('auth.storeAdmin');
+});
+
+Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'destroyAdmin'])->name('auth.destroyAdmin');
+    Route::get('/owners', [OwnerController::class, 'index'])->name('owner.index');
+    Route::get('/owners/create', [RegisterController::class, 'createOwner'])->name('register.createOwner');
+    Route::post('/owners/store', [RegisterController::class, 'storeOwner'])->name('register.storeOwner');
+    Route::delete('/owners/{user_id}', [RegisterController::class, 'destroyOwner'])->name('register.destroyOwner');
 });

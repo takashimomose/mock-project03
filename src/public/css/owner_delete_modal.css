@@ -12,31 +12,38 @@
 }
 
 .modal-content {
-    display: flex;
     width: 300px;
     height: 150px;
     background: white;
     padding: 20px;
     border-radius: 10px;
     margin: 0 auto;
-    justify-content: center;
-    align-items: center;
     border: 2px solid #5580F7;
-    flex-direction: column;
 }
 
 .modal-content p {
     display: block;
     font-size: 1.125rem;
     font-weight: 600;
+    text-align: center;
 }
 
-.okay-btn {
-    display: block;
-    padding: 10px 20px;
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.okay-btn, .cancel-btn {
+    padding: 10px 15px;
     border: none;
     background: #5580F7;
     color: #FFF;
     border-radius: 5px;
     cursor: pointer;
+    min-width: 100px;
+}
+
+.okay-btn:hover, .cancel-btn:hover {
+    opacity: 0.7;
 }
