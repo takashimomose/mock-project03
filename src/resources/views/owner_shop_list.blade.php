@@ -37,8 +37,8 @@
                             <td data-label="作成日時">{{ $shop->created_at }}</td>
                             <td data-label="更新日時">{{ $shop->updated_at }}</td>
                             <td data-label="アクション">
-                                <button class="edit-btn">更新</button>
-                                <button class="delete-btn">削除</button>
+                                <a href="{{ route('shop.edit', ['shop_id' => $shop->id]) }}" class="edit-btn">詳細</a>
+                                <button class="delete-btn" data-shop-id="{{ $shop->id }}">削除</button>
                             </td>
                         </tr>
                     </tbody>
@@ -47,6 +47,11 @@
             <div class=pagination>
                 {{ $shops->links() }}
             </div>
+            @include('components.delete_modal')
         </section>
     </main>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('js/delete_modal.js') }}"></script>
+@endpush
