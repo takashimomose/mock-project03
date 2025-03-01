@@ -96,6 +96,10 @@ class AuthController extends Controller
 
     public function showAdmin()
     {
+        if (auth()->check()) {
+            return redirect()->route('owner.index');
+        }
+
         return view('auth.admin_login');
     }
 
@@ -103,25 +107,25 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            if (Auth::user()->role_id != User::ROLE_ADMIN) {
-                Auth::logout();
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-
-                return back()->withErrors([
-                    'email' => '管理者以外のユーザーはログインできません',
-                ]);
-            }
-
-            return redirect()->intended('/admin/owners');
+        if (!Auth::attempt($credentials)) {
+            return back()->withErrors([
+                'email' => 'ログイン情報が登録されていません',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'ログイン情報が登録されていません',
-        ]);
+        $request->session()->regenerate();
+
+        if (Auth::user()->role_id != User::ROLE_ADMIN) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->withErrors([
+                'email' => '管理者以外のユーザーはログインできません',
+            ]);
+        }
+
+        return redirect()->intended('/admin/owners');
     }
 
     public function destroyAdmin(Request $request)

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteBtns.forEach(button => {
         button.addEventListener("click", function () {
             userIdToDelete = this.getAttribute("data-user-id");
-            modalOverlay.style.display = "flex"; // モーダルを表示
+            modalOverlay.style.display = "flex";
         });
     });
 

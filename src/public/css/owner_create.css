@@ -1,5 +1,5 @@
 .wrapper {
-    margin: 30px auto;
+    margin: 0 auto;
     padding: 0 25px;
     display: flex;
     align-items: center;
@@ -8,59 +8,71 @@
 }
 
 .registration-section {
-    background: #FFF;
-    width: 350px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
-    overflow: hidden;
-}
-
-.card-header {
-    background: #2d64fb;
-    color: #FFF;
-    text-align: left;
-    padding: 18px;
-    font-size: 1.125rem;
-}
-
-.card-body {
-    padding: 15px;
-}
-
-.input-group {
     display: flex;
-    align-items: center;
-    background: #FFF;
-    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 16px;
+    max-width: 500px;
+    width: 100%;
+    flex-direction: column;
 }
 
-.input-group i {
-    color: #4B4B4B;
-    font-size: 1.25rem;
-    margin-right: 10px;
+.registration-section h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .form-input {
-    border: none;
-    border-bottom: 2px solid #333;
-    outline: none;
     width: 100%;
-    font-size: 1rem;
 }
 
-.primary-btn {
-    background: #2d64fb;
+.delete-btn {
+    display: block;
+    padding: 8px 20px;
+    background: #FFB6BB;
     color: #FFF;
-    width: 23%;
-    padding: 6px;
-    border: none;
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
-    margin-left: auto;
-    margin-top: 15px;
+    border: none;
 }
 
-.primary-btn:hover {
-    opacity: 0.7;
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.form-buttons button {
+    display: inline-block;
+} 
+
+.cancel-btn, .primary-btn {
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    margin: 30px 0 20px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    color: #5580F7;
+    background: #FFF;
+    border: 2px solid #5580F7;
+    text-align: center;
+    text-decoration: none;
+}
+
+.primary-btn {
+    color: #FFF;
+    background: #5580F7;
+    border: none;
 }

@@ -9,43 +9,39 @@
 @section('content')
     <main class="wrapper">
         <section class="registration-section">
-            <div class="card-header">店舗代表者作成</div>
-            <div class="card-body">
-                <form method="POST" action="{{ route('register.storeOwner') }}" novalidate>
-                    @csrf
-                    <div class="input-group">
-                        <i class="fa-solid fa-user"></i>
-                        <input class="form-input" type="text" name="name" value="{{ old('name') }}"
-                            placeholder="Username">
-                    </div>
-                    @error('name')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
+            <h1>店舗代表者作成</h1>
+            <form method="POST" action="{{ route('register.storeOwner') }}" novalidate>
+                @csrf
+                <div class="form-group">
+                    <label for="name" class="form-label">店舗代表者名</label>
+                    <input class="form-input" type="text" name="name" value="{{ old('name') }}"
+                        placeholder="店舗代表者名">
+                </div>
+                @error('name')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
 
-                    <div class="input-group">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input class="form-input" type="email" name="email"
-                            value="{{ old('email') }}"placeholder="Email">
-                    </div>
-                    @error('email')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
+                <div class="form-group">
+                    <label for="email" class="form-label">メールアドレス</label>
+                    <input class="form-input" type="email" name="email" value="{{ old('email') }}" placeholder="メールアドレス">
+                </div>
+                @error('email')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
 
-                    <div class="input-group">
-                        <i class="fa-solid fa-lock"></i>
-                        <input class="form-input" type="password" name="password" placeholder="Password">
-                    </div>
-                    @error('password')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
+                <div class="form-group">
+                    <label for="password" class="form-label">パスワード</label>
+                    <input class="form-input" type="password" name="password" placeholder="パスワード">
+                </div>
+                @error('password')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
 
-                    <div class="input-group">
-                        <button type="submit" class="primary-btn">
-                            作成
-                        </button>
-                    </div>
-                </form>
-            </div>
+                <div class="form-buttons">
+                    <a href="{{ route('owner.index') }}" class="cancel-btn">キャンセル</a>
+                    <button type="submit" class="primary-btn">作成</button>
+                </div>
+            </form>
         </section>
     </main>
 @endsection
