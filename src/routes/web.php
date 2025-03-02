@@ -50,4 +50,7 @@ Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function
     Route::post('/shop/upload-temp-image', [ShopController::class, 'uploadTempImage'])->name('shop.uploadTempImage');
     Route::post('/shop/delete-temp-image', [ShopController::class, 'deleteTempImage'])->name('shop.deleteTempImage');
     Route::get('/shop/list', [ShopController::class, 'list'])->name('shop.list');
+    Route::get('/check-in', [ReservationController::class, 'showCheckIn'])->name('reservation.showCheckIn');
+    Route::post('/check-in', [ReservationController::class, 'checkIn'])->name('reservation.checkIn');
+    Route::get('/visited', [ReservationController::class, 'visited'])->name('reservation.visited');
 });

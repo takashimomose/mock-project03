@@ -83,6 +83,13 @@
     text-align: left;
 }
 
+.qr-code svg {
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    background: #FFF;
+}
+
 .favorite-section {
     display: flex;
     row-gap: 24px;

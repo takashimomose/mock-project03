@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             GenresTableSeeder::class,
             ShopsTableSeeder::class,
             LikesTableSeeder::class,
+            ReservationStatusTableSeeder::class,
         ]);
     }
 }
