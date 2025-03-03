@@ -13,6 +13,7 @@ class Area extends Model
 
     protected $fillable = [
         'user_id',
+        'shop_id',
         'name',
     ];
 
@@ -22,11 +23,17 @@ class Area extends Model
             ->get();
     }
 
-    public static function createArea(string $name, int $userId): Area
+    public static function createArea(string $name, int $userId, int $shopId): Area
     {
         return self::create([
             'name' => $name,
             'user_id' => $userId,
+            'shop_id' => $shopId, // 既に作成されたShopのIDを設定
         ]);
+    }
+
+    public static function updateArea(int $areaId, string $name)
+    {
+        self::where('id', $areaId)->update(['name' => $name]);
     }
 }

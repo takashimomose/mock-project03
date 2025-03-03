@@ -13,6 +13,7 @@ class Genre extends Model
 
     protected $fillable = [
         'user_id',
+        'shop_id',
         'name',
     ];
 
@@ -22,11 +23,17 @@ class Genre extends Model
             ->get();
     }
 
-    public static function createGenre(string $name, int $userId): Genre
+    public static function createGenre(string $name, int $userId, int $shopId): Genre
     {
         return self::create([
             'name' => $name,
             'user_id' => $userId,
+            'shop_id' => $shopId, // 既に作成されたShopのIDを設定
         ]);
+    }
+
+    public static function updateGenre(int $genreId, string $name)
+    {
+        self::where('id', $genreId)->update(['name' => $name]);
     }
 }

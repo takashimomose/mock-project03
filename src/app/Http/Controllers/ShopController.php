@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\ShopCreateRequest;
+use App\Http\Requests\ShopUpdateRequest;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
@@ -108,14 +109,6 @@ class ShopController extends Controller
         $data = $request->only(['name', 'area', 'genre', 'description', 'shop_image']);
         $userId = Auth::id();
 
-        $area = Area::createArea($data['area'], $userId);
-        $genre = Genre::createGenre($data['genre'], $userId);
-
-        $data['area_id'] = $area->id;
-        $data['genre_id'] = $genre->id;
-        unset($data['area'], $data['genre']);
-        $data['user_id'] = $userId;
-
         if ($request->hasFile('shop_image')) {
             $path = $request->file('shop_image')->store('shop_images', 'public');
             $data['shop_image'] = $path;
@@ -124,7 +117,22 @@ class ShopController extends Controller
             $data['shop_image'] = Session::get('shop_image_temp');
         }
 
-        Shop::createShop($data);
+        $shop = Shop::createShop([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'user_id' => $userId,
+            'shop_image' => $data['shop_image'],
+        ]);
+
+        $shopId = $shop->id;
+
+        $area = Area::createArea($data['area'], $userId, $shopId);
+        $genre = Genre::createGenre($data['genre'], $userId, $shopId);
+
+        $shop->update([
+            'area_id' => $area->id,
+            'genre_id' => $genre->id,
+        ]);
 
         Session::forget('shop_image_temp');
 
@@ -143,7 +151,53 @@ class ShopController extends Controller
         $userId = Auth::id();
         $shops = Shop::searchShops()
             ->paginate(self::ITEMS_PER_PAGE);
-            
+
         return view('owner_shop_list', compact('shops'));
+    }
+
+    public function edit($shopId)
+    {
+        if (!Session::has('errors')) {
+            Session::forget('shop_image_temp');
+        }
+
+        $shop = Shop::getShopDetail($shopId);
+
+        if ($shop->user_id !== Auth::id()) {
+            abort(404);
+        }
+
+        return view('owner_shop_edit', compact('shop'));
+    }
+
+    public function update(ShopUpdateRequest $request, $shopId)
+    {
+        $shop = Shop::findOrFail($shopId);
+
+        $data = $request->only(['name', 'area', 'genre', 'description', 'shop_image']);
+
+        Area::updateArea($shop->area_id, $data['area']);
+        Genre::updateGenre($shop->genre_id, $data['genre']);
+
+        if ($request->hasFile('shop_image')) {
+            $path = $request->file('shop_image')->store('shop_images', 'public');
+            $data['shop_image'] = $path;
+            Session::put('shop_image_temp', $path);
+        } elseif (Session::has('shop_image_temp')) {
+            $data['shop_image'] = Session::get('shop_image_temp');
+        }
+
+        Shop::updateShop($data, $shopId);
+
+        Session::forget('shop_image_temp');
+
+        return redirect()->route('shop.edit', ['shop_id' => $shopId, 'success' => 'true']);
+    }
+
+    public function destroy($shopId)
+    {
+        Shop::deleteShop($shopId);
+
+        return response()->json(['success' => true]);
     }
 }
