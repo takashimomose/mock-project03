@@ -51,6 +51,9 @@ Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function
     Route::post('/shop/upload-temp-image', [ShopController::class, 'uploadTempImage'])->name('shop.uploadTempImage');
     Route::post('/shop/delete-temp-image', [ShopController::class, 'deleteTempImage'])->name('shop.deleteTempImage');
     Route::get('/shop/list', [ShopController::class, 'list'])->name('shop.list');
+    Route::get('/shop/{shop_id}', [ShopController::class, 'edit'])->name('shop.edit');
+    Route::put('/shop/{shop_id}', [ShopController::class, 'update'])->name('shop.update');
+    Route::delete('/shop/delete/{shop_id}', [ShopController::class, 'destroy'])->name('shop.destroy');
 });
 
 Route::prefix('admin')->middleware('check.role:admin')->group(function () {

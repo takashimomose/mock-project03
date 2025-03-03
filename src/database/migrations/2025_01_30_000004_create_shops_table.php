@@ -15,8 +15,8 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('area_id');
-            $table->unsignedBigInteger('genre_id');
+            $table->unsignedBigInteger('area_id')->nullable();
+            $table->unsignedBigInteger('genre_id')->nullable();
             $table->string('name');
             $table->text('description');
             $table->string('shop_image', 255);
