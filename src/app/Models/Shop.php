@@ -85,4 +85,26 @@ class Shop extends Model
     {
         return self::create($data);
     }
+
+    public static function updateShop($data, $shopId)
+    {
+        $shop = self::findOrFail($shopId);
+
+        return $shop->update([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'shop_image' => $data['shop_image'] ?? $shop->shop_image,
+        ]);
+    }
+
+    public static function deleteShop($shopId)
+    {
+        $shop = self::find($shopId);
+
+        if ($shop) {
+            return $shop->delete();
+        }
+
+        return false;
+    }
 }
