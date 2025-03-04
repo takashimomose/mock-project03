@@ -67,4 +67,22 @@ class Reservation extends Model
             ->where('user_id', $user->id)
             ->delete();
     }
+
+    public static function getReservations()
+    {
+        $query = self::select(
+            'reservations.id',
+            'reservations.date',
+            'reservations.time',
+            'reservations.people',
+            'shops.name as shop_name',
+            'users.name as user_name',
+            'reservations.created_at'
+        )
+            ->join('shops', 'reservations.shop_id', '=', 'shops.id')
+            ->join('users', 'reservations.user_id', '=', 'users.id')
+            ->orderBy('reservations.id', 'asc');
+
+        return $query;
+    }
 }

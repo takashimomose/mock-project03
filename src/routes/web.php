@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ShopController;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,4 +54,5 @@ Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function
     Route::get('/shop/{shop_id}', [ShopController::class, 'edit'])->name('shop.edit');
     Route::put('/shop/{shop_id}', [ShopController::class, 'update'])->name('shop.update');
     Route::delete('/shop/delete/{shop_id}', [ShopController::class, 'destroy'])->name('shop.destroy');
+    Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');
 });
