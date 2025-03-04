@@ -16,8 +16,6 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    private const ITEMS_PER_PAGE = 20;
-
     public function index(Request $request)
     {
         $areaId = $request->input('area_id');
@@ -150,7 +148,7 @@ class ShopController extends Controller
     {
         $userId = Auth::id();
         $shops = Shop::searchShops()
-            ->paginate(self::ITEMS_PER_PAGE);
+            ->paginate(config('const.items_per_page'));
 
         return view('owner_shop_list', compact('shops'));
     }
