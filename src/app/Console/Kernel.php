@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Jobs\SendReservationReminderJob;
+use App\Models\Reservation;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +17,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $reservations = Reservation::getTodayReservations();
+            foreach ($reservations as $reservation) {
+                dispatch(new SendReservationReminderJob($reservation));
+            }
+        })->dailyAt('09:00');
     }
 
     /**

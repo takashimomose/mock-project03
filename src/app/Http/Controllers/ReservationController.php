@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendReservationReminderJob;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,4 +16,5 @@ class ReservationController extends Controller
 
         return redirect()->route('customer.show');
     }
+
 }
