@@ -30,4 +30,28 @@ class RegisterController extends Controller
     {
         return view('register_thanks');
     }
+
+    public function createOwner()
+    {
+        return view('auth.owner_create');
+    }
+
+    public function storeOwner(RegisterRequest $request)
+    {
+        User::create([
+            'role_id' => User::ROLE_OWNER,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('owner.index', ['success' => 'true']);
+    }
+
+    public function destroyOwner($userId)
+    {
+        User::deleteOwner($userId);
+
+        return response()->json(['success' => true]);
+    }
 }
