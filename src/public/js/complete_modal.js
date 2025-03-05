@@ -8,9 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         closeModalBtn.addEventListener("click", function () {
             modalOverlay.style.display = "none";
-
-            const url = window.location.href.split('?')[0];
-            window.history.replaceState(null, '', url);
         });
     }
 });
