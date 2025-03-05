@@ -1,4 +1,4 @@
-.shop-list-section {
+.owner-list-section {
     max-width: 1200px;
     width: 90%;
     margin: auto;
@@ -8,61 +8,67 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.shop-list-header {
+.owner-list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.shop-table {
+.create-btn {
+    background-color: #3560F6;
+    text-decoration: none;
+    color: #FFF;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+.owner-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.shop-table th:nth-child(1),
-.shop-table td:nth-child(1) {
+.owner-table th:nth-child(1),
+.owner-table td:nth-child(1) {
     width: 30px;
 }
 
-.shop-table th:nth-child(2),
-.shop-table td:nth-child(2) {
+.owner-table th:nth-child(2),
+.owner-table td:nth-child(2) {
     width: 120px;
 }
 
-.shop-table th:nth-child(3),
-.shop-table td:nth-child(3) {
+.owner-table th:nth-child(3),
+.owner-table td:nth-child(3) {
     width: 60px;
 }
 
-.shop-table th:nth-child(4),
-.shop-table td:nth-child(4) {
+.owner-table th:nth-child(4),
+.owner-table td:nth-child(4) {
     width: 60px;
 }
 
-.shop-table th:nth-child(5),
-.shop-table td:nth-child(5) {
+.owner-table th:nth-child(5),
+.owner-table td:nth-child(5) {
     width: 90px;
 }
 
-.shop-table th:nth-child(6),
-.shop-table td:nth-child(6) {
-    width: 90px;
+.owner-table th:nth-child(6),
+.owner-table td:nth-child(6) {
+    width: 60px;
 }
 
-.shop-table th:nth-child(7),
-.shop-table td:nth-child(7) {
-    width: 150px;
-}
-
-.shop-table th,
-.shop-table td {
+.owner-table th,
+.owner-table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
 }
 
-.shop-table th {
+.owner-table th {
     background-color: #3560F6;
     color: #FFF;
     white-space: nowrap;
@@ -76,14 +82,13 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 1rem;
-    text-decoration: none;
 }
 
 .delete-btn {
     background-color: #dc3545;
     color: #FFF;
     border: none;
-    padding: 7px 15px;
+    padding: 10px 15px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1rem;
@@ -123,11 +128,11 @@
 
 @media (max-width: 768px) {
 
-    .shop-table thead {
+    .owner-table thead {
         display: none;
     }
 
-    .shop-table tr {
+    .owner-table tr {
         display: block;
         width: auto !important;
         margin-bottom: 10px;
@@ -136,11 +141,11 @@
         margin-bottom: 40px;
     }
 
-    .shop-table th {
+    .owner-table th {
         width: auto;
     }
 
-    .shop-table td {
+    .owner-table td {
         display: flex;
         width: auto !important;
         justify-content: space-between;
@@ -148,7 +153,7 @@
         text-align: right;
     }
 
-    .shop-table td::before {
+    .owner-table td::before {
         content: attr(data-label);
         font-weight: bold;
         white-space: nowrap;
