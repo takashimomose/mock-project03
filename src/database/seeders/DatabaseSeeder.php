@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AreasTableSeeder::class,
             GenresTableSeeder::class,
             UpdateShopsTableSeeder::class,
+            ReservationStatusTableSeeder::class,
         ]);
     }
 }

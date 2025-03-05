@@ -42,7 +42,14 @@
                                     <th>Number</th>
                                     <td id="peopleTd">{{ $reservation->people }}</td>
                                 </tr>
+                                <tr>
+                                    <th>Status</th>
+                                    <td id="reservationStatusTd">{{ $reservation->reservation_status }}</td>
+                                </tr>
                             </table>
+                            @if ($reservation->reservation_status_id == \App\Models\Reservation::STATUS_NO_SHOW)
+                                <div class="qr-code">{!! QrCode::size(200)->generate($reservation->qrcode_url)->toHtml() !!}</div>
+                            @endif
                         </div>
                     @endforeach
                 </section>
@@ -55,10 +62,13 @@
                                 <img src="{{ $shop->shop_image }}" alt="{{ $shop->name }}">
                                 <div class="card-content">
                                     <h2>{{ $shop->name }}</h2>
-                                    <a href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
-                                    <a href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
+                                    <a
+                                        href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
+                                    <a
+                                        href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
                                     <div class="card-buttons">
-                                        <a href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}" class="shop-detail">詳しくみる</a>
+                                        <a href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}"
+                                            class="shop-detail">詳しくみる</a>
                                         <form action="{{ route('shop.like', ['shop_id' => $shop->id]) }}" method="POST">
                                             @csrf
                                             <button class="heart">

@@ -55,6 +55,9 @@ Route::prefix('owner')->middleware(['auth', 'check.role:owner'])->group(function
     Route::get('/shop/{shop_id}', [ShopController::class, 'edit'])->name('shop.edit');
     Route::put('/shop/{shop_id}', [ShopController::class, 'update'])->name('shop.update');
     Route::delete('/shop/delete/{shop_id}', [ShopController::class, 'destroy'])->name('shop.destroy');
+    Route::get('/check-in', [ReservationController::class, 'showCheckIn'])->name('reservation.showCheckIn');
+    Route::post('/check-in', [ReservationController::class, 'checkIn'])->name('reservation.checkIn');
+    Route::get('/visited', [ReservationController::class, 'visited'])->name('reservation.visited');
     Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');
 });
 
