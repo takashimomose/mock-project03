@@ -49,7 +49,7 @@ class ReservationController extends Controller
 
         if ($reservation->reservation_status_id === Reservation::STATUS_VISITED) {
             return redirect()->route('reservation.visited');
-        } 
+        }
 
         $userName = $reservation->user->name;
 
@@ -68,9 +68,8 @@ class ReservationController extends Controller
         return redirect()->route('reservation.visited', ['success' => 'true']);
     }
 
-    public function visited() {
-        
+    public function visited()
+    {
         return view('owner_visited');
-
     }
 }

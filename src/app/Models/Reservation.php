@@ -33,9 +33,6 @@ class Reservation extends Model
         return $this->belongsTo(Shop::class, 'shop_id'); 
     }
 
-    const STATUS_NO_SHOW = 1;
-    const STATUS_VISITED = 2;
-
     public static function getReservation()
     {
         return self::select(
@@ -62,6 +59,9 @@ class Reservation extends Model
                 return $reservation;
             });
     }
+
+    const STATUS_NO_SHOW = 1;
+    const STATUS_VISITED = 2;
 
     public static function createReservation($request, $user)
     {
