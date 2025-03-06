@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ShopController;
-use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,4 +72,6 @@ Route::prefix('admin')->middleware(['auth', 'check.role:admin'])->group(function
     Route::get('/owners/create', [RegisterController::class, 'createOwner'])->name('register.createOwner');
     Route::post('/owners/store', [RegisterController::class, 'storeOwner'])->name('register.storeOwner');
     Route::delete('/owners/{user_id}', [RegisterController::class, 'destroyOwner'])->name('register.destroyOwner');
+    Route::get('/annoucements/create', [AnnouncementController::class, 'create'])->name('announcement.create');
+    Route::post('/annoucements/create', [AnnouncementController::class, 'send'])->name('announcement.send');
 });

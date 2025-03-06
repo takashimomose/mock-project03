@@ -52,8 +52,8 @@
                                     </ul>
                                 @elseif (Auth::user()->role_id == \App\Models\User::ROLE_ADMIN)
                                     <ul class="menu">
-                                        <li class="menu_item"><a href="{{ route('owner.index') }}">HOME</a>
-                                        </li>
+                                        <li class="menu_item"><a href="{{ route('owner.index') }}">HOME</a></li>
+                                        <li class="menu_item"><a href="{{ route('announcement.create') }}">Announcement</a></li>
                                         <li class="menu_item">
                                             <form action="{{ route('auth.destroyAdmin') }}" method="POST">
                                                 @csrf
