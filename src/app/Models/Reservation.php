@@ -83,6 +83,30 @@ class Reservation extends Model
             ->delete();
     }
 
+    public static function getTodayReservations()
+    {
+        return self::select(
+            'reservations.id',
+            'users.id as user_id',
+            'users.name as user_name',
+            'users.email as user_email',
+            'shops.name as shop_name',
+            'shops.id as shop_id',
+            'shops.name as shop_name',
+            'reservations.date',
+            'reservations.time',
+            'reservations.people'
+        )
+            ->join('users', 'reservations.user_id', '=', 'users.id')
+            ->join('shops', 'reservations.shop_id', '=', 'shops.id')
+            ->whereDate('reservations.date', today())
+            ->get()
+            ->map(function ($reservation) {
+                $reservation->time = Carbon::parse($reservation->time)->format('H:i');
+                return $reservation;
+            });
+    }
+
     public static function getReservations()
     {
         $query = self::select(
