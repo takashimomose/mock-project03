@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\AnnoucementMail;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\AnnouncementCreateRequest;
 use Illuminate\Support\Facades\Mail;
 
 class AnnouncementController extends Controller
@@ -14,7 +14,7 @@ class AnnouncementController extends Controller
         return view('admin_announcement_create');
     }
 
-    public function send(Request $request)
+    public function send(AnnouncementCreateRequest $request)
     {
         $data = $request->only(['title', 'content']);
 
