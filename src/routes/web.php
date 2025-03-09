@@ -4,9 +4,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ShopController;
-use App\Models\Reservation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,8 +36,10 @@ Route::middleware(['auth', 'check.role:general'])->group(function () {
     Route::post('/like/{shop_id}', [ShopController::class, 'like'])->name('shop.like');
     Route::post('/reserve', [ShopController::class, 'reserve'])->name('shop.reserve');
     Route::delete('/reserve/{reservation_id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
+    Route::put('/reserve/update/{reservation_id}', [ReservationController::class, 'update'])->name('register.update');
     Route::get('/done', [ShopController::class, 'done'])->name('shop.done');
     Route::get('/{shop_id}', [ShopController::class, 'detail'])->name('shop.detail');
+    Route::post('/{shop_id}/store', [RatingController::class, 'store'])->name('rating.store');
 });
 
 Route::prefix('owner')->middleware('check.role:owner')->group(function () {

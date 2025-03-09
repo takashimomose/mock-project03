@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ReservationRequest extends FormRequest
 {
@@ -30,5 +32,13 @@ class ReservationRequest extends FormRequest
             'people.integer' => '人数は数字で入力してください',
             'people.min' => '人数は1以上の数字で入力してください',
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success' => false,
+            'errors' => $validator->errors(),
+        ], 422));
     }
 }
