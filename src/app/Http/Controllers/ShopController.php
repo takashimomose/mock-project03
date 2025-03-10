@@ -10,6 +10,7 @@ use App\Models\Genre;
 use App\Models\Reservation;
 use App\Models\Shop;
 use App\Models\Like;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -69,6 +70,16 @@ class ShopController extends Controller
     public function reserve(ReservationRequest $request)
     {
         $user = Auth::user();
+
+        $existingReservation = Reservation::where('user_id', $user->id)
+            ->where('shop_id', $request->input('shop_id'))
+            ->where('date', $request->input('date'))
+            ->where('time', Carbon::parse($request->input('time'))->format('H:i:s'))
+            ->exists();
+
+        if ($existingReservation) {
+            return back()->withErrors(['error' => 'こちらの店舗で選択した日時にはすでに予約があります']);
+        }
 
         Reservation::createReservation($request, $user);
 
