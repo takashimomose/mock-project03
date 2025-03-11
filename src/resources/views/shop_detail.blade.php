@@ -79,6 +79,7 @@
                                 <td id="peopleTd"></td>
                             </tr>
                         </table>
+                        <p class="error-message">{{ $errors->first('error') }}</p>
                     </div>
                     <button class="reserve-btn">予約する</button>
                 </form>
