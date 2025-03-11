@@ -19,7 +19,7 @@ class Reservation extends Model
         'date',
         'time',
         'people',
-        'reservation_code', 
+        'reservation_code',
         'reservation_status_id',
     ];
 
@@ -30,7 +30,12 @@ class Reservation extends Model
 
     public function shop()
     {
-        return $this->belongsTo(Shop::class, 'shop_id'); 
+        return $this->belongsTo(Shop::class, 'shop_id');
+    }
+
+    public function getTimeAttribute($value)
+    {
+        return Carbon::parse($value)->format('H:i');
     }
 
     public static function getReservation()
@@ -55,7 +60,7 @@ class Reservation extends Model
                 $reservation->time = Carbon::parse($reservation->time)->format('H:i');
                 $localIp = config('app.local_ip'); // 設定値を取得
                 $reservation->qrcode_url = $localIp . '/owner/check-in?reservation_code=' . $reservation->reservation_code;
-                
+
                 return $reservation;
             });
     }
@@ -114,12 +119,14 @@ class Reservation extends Model
             'reservations.date',
             'reservations.time',
             'reservations.people',
+            'reservation_status.name as reservation_status_name',
             'shops.name as shop_name',
             'users.name as user_name',
             'reservations.created_at'
         )
             ->join('shops', 'reservations.shop_id', '=', 'shops.id')
             ->join('users', 'reservations.user_id', '=', 'users.id')
+            ->join('reservation_status', 'reservations.reservation_status_id', '=', 'reservation_status.id')
             ->orderBy('reservations.id', 'asc');
 
         return $query;
