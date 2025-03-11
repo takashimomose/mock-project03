@@ -14,8 +14,8 @@ class RatingController extends Controller
 
         $rating = Rating::createRating($request);
 
-        Reservation::where('id', $request->reservation_id)
-        ->update(['rating_id' => $rating->id]);
+        Reservation::find($request->reservation_id)
+            ->update(['rating_id' => $rating->id]);
 
         return response()->json(['success' => true]);
     }

@@ -25,12 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const inputRating = ratingInput.value;
         const inputComment = commentTextarea.value;
 
-        console.log("店舗ID:", ratingShopId);
-        console.log("ユーザーID:", ratingUserId);
-        console.log("予約ID:", ratingReservationId);
-        console.log("五段階評価:", inputRating);
-        console.log("コメント:", inputComment);
-
         fetch(`/${ratingShopId}/store`, {
             method: "POST",
             headers: {

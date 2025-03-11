@@ -21,12 +21,6 @@ class Rating extends Model
 
     public static function createRating($request)
     {
-        return self::create([
-            'shop_id' => $request->input('shop_id'),
-            'user_id' => $request->input('user_id'),
-            'reservation_id' => $request->input('reservation_id'),
-            'rating' => $request->input('rating'),
-            'comment' => $request->input('comment'),
-        ]);
+        return self::create($request->all());
     }
 }

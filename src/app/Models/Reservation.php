@@ -129,12 +129,6 @@ class Reservation extends Model
 
     public static function updateReservation($data, $reservationId)
     {
-        $reservation = self::findOrFail($reservationId);
-
-        return $reservation->update([
-            'date' => $data['date'],
-            'time' => $data['time'],
-            'people' => $data['people'],
-        ]);
+        self::findOrFail($reservationId)->update($data);
     }
 }
