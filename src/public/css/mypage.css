@@ -28,6 +28,7 @@
     text-align: left;
     display: block;
     width: 100%;
+    white-space: nowrap;
 }
 
 .reservation-card {
@@ -63,6 +64,7 @@
 
 .reservation-order {
     padding-right: 40%;
+    white-space: nowrap;
 }
 
 .delete-btn {
@@ -94,7 +96,7 @@
     display: flex;
     row-gap: 24px;
     column-gap: 16px;
-    width: 53%;
+    width: 60%;
     flex-direction: column;
     margin: 0 15px;
 }
