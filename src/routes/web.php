@@ -7,8 +7,6 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ShopController;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,27 +19,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->name('verification.notice');
-
-Route::get('/email/verify/{id}/{hash}', function (Request $request) {
-    $user = User::findOrFail($request->route('id'));
-
-    if (! hash_equals((string) $request->route('hash'), sha1($user->email))) {
-        throw new \Illuminate\Validation\ValidationException('Invalid email verification link.');
-    }
-
-    $user->markEmailAsVerified();
-
-    return redirect()->route('auth.show')->with('verified', true);
-})->middleware(['signed'])->name('verification.verify');
 
 Route::group([], function () {
     Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/thanks', [RegisterController::class, 'thanks'])->name('register.thanks');
-
+    Route::get('/email/verify', [AuthController::class, 'showVerifyEmailNotice'])->name('auth.showVerifyEmailNotice');
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
     Route::get('/login', [AuthController::class, 'show'])->name('auth.show');
     Route::post('/login', [AuthController::class, 'store'])->name('auth.store');
 });

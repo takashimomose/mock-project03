@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -19,6 +20,27 @@ class AuthController extends Controller
 
         return view('auth.login');
     }
+
+    public function showVerifyEmailNotice()
+    {
+        return view('auth.verify-email');
+    }
+
+    public function verifyEmail(Request $request)
+    {
+        $user = User::findOrFail($request->route('id'));
+
+        if (! hash_equals((string) $request->route('hash'), sha1($user->email))) {
+            throw ValidationException::withMessages([
+                'email' => 'Invalid email verification link.',
+            ]);
+        }
+
+        $user->markEmailAsVerified();
+
+        return redirect()->route('auth.show')->with('verified', true);
+    }
+
 
     public function store(AuthRequest $request)
     {
