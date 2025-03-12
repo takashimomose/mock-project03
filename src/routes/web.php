@@ -25,7 +25,8 @@ Route::group([], function () {
     Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/thanks', [RegisterController::class, 'thanks'])->name('register.thanks');
-
+    Route::get('/email/verify', [AuthController::class, 'showVerifyEmailNotice'])->name('auth.showVerifyEmailNotice');
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
     Route::get('/login', [AuthController::class, 'show'])->name('auth.show');
     Route::post('/login', [AuthController::class, 'store'])->name('auth.store');
 });

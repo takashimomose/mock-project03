@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -19,29 +21,59 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function store(AuthRequest $request)
+    public function showVerifyEmailNotice()
     {
-        $credentials = $request->only(['email', 'password']);
+        return view('auth.verify-email');
+    }
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    public function verifyEmail(Request $request)
+    {
+        $user = User::findOrFail($request->route('id'));
 
-            if (Auth::user()->role_id != User::ROLE_GENERAL) {
-                Auth::logout();
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-
-                return back()->withErrors([
-                    'email' => '利用者以外のユーザーはログインできません',
-                ]);
-            }
-
-            return redirect()->intended('/');
+        if (! hash_equals((string) $request->route('hash'), sha1($user->email))) {
+            throw ValidationException::withMessages([
+                'email' => 'Invalid email verification link.',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'ログイン情報が登録されていません',
-        ]);
+        $user->markEmailAsVerified();
+
+        return redirect()->route('auth.show')->with('verified', true);
+    }
+
+
+    public function store(AuthRequest $request)
+    {
+        $credentials = $request->validated();
+
+        if (!Auth::attempt($credentials)) {
+            return back()->withErrors([
+                'email' => 'ログイン情報が登録されていません',
+            ]);
+        }
+
+        $request->session()->regenerate();
+
+        if (Auth::user()->role_id != User::ROLE_GENERAL) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->withErrors([
+                'email' => '利用者以外のユーザーはログインできません',
+            ]);
+        }
+
+        $user = Auth::user();
+
+        if (is_null(Auth::user()->email_verified_at)) {
+            event(new Registered($user));
+
+            Auth::logout();
+            return redirect()->route('register.thanks');
+        }
+
+        return redirect()->intended('/');
     }
 
     public function destroy(Request $request)
@@ -63,25 +95,25 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            if (Auth::user()->role_id != User::ROLE_OWNER) {
-                Auth::logout();
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-
-                return back()->withErrors([
-                    'email' => '店舗代表者以外のユーザーはログインできません',
-                ]);
-            }
-
-            return redirect()->intended('/owner/shop/create');
+        if (!Auth::attempt($credentials)) {
+            return back()->withErrors([
+                'email' => 'ログイン情報が登録されていません',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'ログイン情報が登録されていません',
-        ]);
+        $request->session()->regenerate();
+
+        if (Auth::user()->role_id != User::ROLE_OWNER) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->withErrors([
+                'email' => '店舗代表者以外のユーザーはログインできません',
+            ]);
+        }
+
+        return redirect()->intended('/owner/shop/create');
     }
 
     public function destroyOwner(Request $request)

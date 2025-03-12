@@ -28,11 +28,15 @@
     padding: 15px;
 }
 
-.card-body p {
+.title {
     text-align: center;
     font-size: 1.125rem;
     font-weight: 600;
-    margin-bottom: 40px;
+}
+
+.message {
+    font-size: 0.8rem;
+    text-align: center;
 }
 
 .card-body a {
