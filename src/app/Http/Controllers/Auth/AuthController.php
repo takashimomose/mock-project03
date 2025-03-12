@@ -41,7 +41,6 @@ class AuthController extends Controller
         return redirect()->route('auth.show')->with('verified', true);
     }
 
-
     public function store(AuthRequest $request)
     {
         $credentials = $request->validated();
@@ -113,12 +112,7 @@ class AuthController extends Controller
             ]);
         }
 
-            return redirect()->intended('/owner/shop/list');
-        }
-
-        return back()->withErrors([
-            'email' => 'ログイン情報が登録されていません',
-        ]);
+        return redirect()->intended('/owner/shop/create');
     }
 
     public function destroyOwner(Request $request)
