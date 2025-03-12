@@ -2,4 +2,9 @@
 
 return [
     'items_per_page' => 20,
+    'MY_PATE_SHOP_NAME_LIMIT' => 24,
+    'MY_PAGE_LIKED_SHOP_NAME_LIMIT' => 18,
+    'SHOP_DETAIL_SHOP_NAME_LIMIT' => 38,
+    'SHOP_DETAIL_RESERVATION_SHOP_NAME_LIMIT' => 38,
+    'SHOP_LIST_SHOP_NAME_LIMIT' => 18,
 ];

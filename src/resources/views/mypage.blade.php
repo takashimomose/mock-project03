@@ -30,7 +30,7 @@
                             <table class="reservation-table">
                                 <tr>
                                     <th>Shop</th>
-                                    <td>{{ Str::limit($reservation->shop_name, 24, '...') }}</td>
+                                    <td>{{ Str::limit($reservation->shop_name, config('const.MY_PATE_SHOP_NAME_LIMIT'), '...') }}</td>
                                 </tr>
                                 <tr>
                                     <th>Date</th>
@@ -74,7 +74,7 @@
                             <div class="card">
                                 <img src="{{ $likedshop->shop_image }}" alt="{{ $likedshop->name }}">
                                 <div class="card-content">
-                                    <h2>{{ Str::limit($likedshop->name, 18, '...') }}</h2>
+                                    <h2>{{ Str::limit($likedshop->name, config('const.MY_PAGE_LIKED_SHOP_NAME_LIMIT'), '...') }}</h2>
                                     <a
                                         href="{{ route('shop.index') }}?area_id={{ $likedshop->area_id }}">#{{ $likedshop->area_name }}</a>
                                     <a
