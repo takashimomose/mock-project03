@@ -21,11 +21,6 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function showVerifyEmailNotice()
-    {
-        return view('auth.verify-email');
-    }
-
     public function verifyEmail(Request $request)
     {
         $user = User::findOrFail($request->route('id'));
@@ -112,7 +107,7 @@ class AuthController extends Controller
             ]);
         }
 
-        return redirect()->intended('/owner/shop/create');
+        return redirect()->intended('/owner/shop/list');
     }
 
     public function destroyOwner(Request $request)

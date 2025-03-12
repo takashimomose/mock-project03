@@ -15,7 +15,7 @@
                 <div class="card">
                     <img src="{{ $shop->shop_image }}" alt="{{ $shop->name }}">
                     <div class="card-content">
-                        <h2>{{ Str::limit($shop->name, 18, '...') }}</h2>
+                        <h2>{{ Str::limit($shop->name, config('const.SHOP_LIST_SHOP_NAME_LIMIT'), '...') }}</h2>
                         <a href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
                         <a href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
                         <div class="card-buttons">

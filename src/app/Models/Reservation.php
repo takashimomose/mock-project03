@@ -39,11 +39,6 @@ class Reservation extends Model
         return Carbon::parse($value)->format('H:i');
     }
 
-    public function getTimeAttribute($value)
-    {
-        return Carbon::parse($value)->format('H:i');
-    }
-
     public static function getReservation()
     {
         return self::select(
