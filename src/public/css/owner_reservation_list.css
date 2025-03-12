@@ -28,21 +28,22 @@
 .reservation-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .reservation-table th:nth-child(1),
 .reservation-table td:nth-child(1) {
-    width: 30px;
+    width: 20px;
 }
 
 .reservation-table th:nth-child(2),
 .reservation-table td:nth-child(2) {
-    width: 120px;
+    width: 60px;
 }
 
 .reservation-table th:nth-child(3),
 .reservation-table td:nth-child(3) {
-    width: 60px;
+    width: 40px;
 }
 
 .reservation-table th:nth-child(4),
@@ -57,7 +58,17 @@
 
 .reservation-table th:nth-child(6),
 .reservation-table td:nth-child(6) {
+    width: 20px;
+}
+
+.reservation-table th:nth-child(7),
+.reservation-table td:nth-child(7) {
     width: 60px;
+}
+
+.reservation-table th:nth-child(8),
+.reservation-table td:nth-child(8) {
+    width: 50px;
 }
 
 .reservation-table th,
@@ -70,7 +81,6 @@
 .reservation-table th {
     background-color: #3560F6;
     color: #FFF;
-    white-space: nowrap;
 }
 
 .edit-btn {

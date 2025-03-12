@@ -70,26 +70,22 @@
                 <section class="favorite-section">
                     <h2 class="section-name">お気に入り店舗</h2>
                     <div class= "card-group">
-                        @foreach ($likedShops as $shop)
+                        @foreach ($likedShops as $likedshop)
                             <div class="card">
-                                <img src="{{ $shop->shop_image }}" alt="{{ $shop->name }}">
+                                <img src="{{ $likedshop->shop_image }}" alt="{{ $likedshop->name }}">
                                 <div class="card-content">
-                                    <h2>{{ $shop->name }}</h2>
+                                    <h2>{{ $likedshop->name }}</h2>
                                     <a
-                                        href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
+                                        href="{{ route('shop.index') }}?area_id={{ $likedshop->area_id }}">#{{ $likedshop->area_name }}</a>
                                     <a
-                                        href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
+                                        href="{{ route('shop.index') }}?genre_id={{ $likedshop->genre_id }}">#{{ $likedshop->genre_name }}</a>
                                     <div class="card-buttons">
-                                        <a href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}"
+                                        <a href="{{ route('shop.detail', ['shop_id' => $likedshop->id]) }}"
                                             class="shop-detail">詳しくみる</a>
-                                        <form action="{{ route('shop.like', ['shop_id' => $shop->id]) }}" method="POST">
+                                        <form action="{{ route('shop.like', ['shop_id' => $likedshop->id]) }}" method="POST">
                                             @csrf
                                             <button class="heart">
-                                                @if ($shop->likes_user_id)
-                                                    <i class="fa-solid fa-heart" style="color: #EB3223"></i>
-                                                @else
-                                                    <i class="fa-solid fa-heart"></i>
-                                                @endif
+                                                <i class="fa-solid fa-heart" style="color: #EB3223"></i>
                                             </button>
                                         </form>
                                     </div>

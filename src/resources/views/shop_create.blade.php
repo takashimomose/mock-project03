@@ -23,7 +23,8 @@
 
                 <div class="form-group">
                     <label for="area" class="form-label">地域</label>
-                    <input class="form-input" type="text" name="area" value="{{ old('area', $oldData['area'] ?? '') }}" placeholder="地域を入力">
+                    <input class="form-input" type="text" name="area"
+                        value="{{ old('area', $oldData['area'] ?? '') }}" placeholder="地域を入力">
                 </div>
                 @error('area')
                     <div class="error-message">{{ $message }}</div>
@@ -31,7 +32,8 @@
 
                 <div class="form-group">
                     <label for="genre" class="form-label">ジャンル</label>
-                    <input class="form-input" type="text" name="genre" value="{{ old('genre', $oldData['genre'] ?? '') }}" placeholder="ジャンルを入力">
+                    <input class="form-input" type="text" name="genre"
+                        value="{{ old('genre', $oldData['genre'] ?? '') }}" placeholder="ジャンルを入力">
                 </div>
                 @error('genre')
                     <div class="error-message">{{ $message }}</div>
@@ -76,7 +78,7 @@
                 @enderror
 
                 <div class="form-buttons">
-                    <a href="" class="cancel-btn">キャンセル</a>
+                    <a href="{{ route('shop.list') }}" class="cancel-btn">キャンセル</a>
                     <button type="submit" class="primary-btn" value='submit'>作成</button>
                 </div>
             </form>
@@ -86,6 +88,6 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/shop_image_upload.js') }}"></script>
-<script src="{{ asset('js/complete_modal.js') }}"></script>
+    <script src="{{ asset('js/shop_image_upload.js') }}"></script>
+    <script src="{{ asset('js/complete_modal.js') }}"></script>
 @endpush

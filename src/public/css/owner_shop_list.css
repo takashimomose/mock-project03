@@ -15,6 +15,16 @@
     margin-bottom: 20px;
 }
 
+.create-btn {
+    background-color: #3560F6;
+    text-decoration: none;
+    color: #FFF;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 .shop-table {
     width: 100%;
     border-collapse: collapse;
