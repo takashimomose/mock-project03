@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationRequest;
 use App\Models\Shop;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
@@ -71,5 +72,14 @@ class ReservationController extends Controller
     public function visited()
     {
         return view('owner_visited');
+    }
+
+    public function update(ReservationRequest $request, $reservationId)
+    {
+        $data = $request->only(['date', 'time', 'people']);
+
+        Reservation::updateReservation($data, $reservationId);
+
+        return response()->json(['success' => true]);
     }
 }

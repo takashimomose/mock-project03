@@ -20,9 +20,11 @@
                                     onsubmit="return confirm('予約をキャンセルしますか？');">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="delete-btn">
-                                        <i class="fa-solid fa-circle-xmark"></i>
-                                    </button>
+                                    @if ($reservation->reservation_status_id == \App\Models\Reservation::STATUS_NO_SHOW)
+                                        <button class="delete-btn">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        </button>
+                                    @endif
                                 </form>
                             </div>
                             <table class="reservation-table">
@@ -49,6 +51,17 @@
                             </table>
                             @if ($reservation->reservation_status_id == \App\Models\Reservation::STATUS_NO_SHOW)
                                 <div class="qr-code">{!! QrCode::size(200)->generate($reservation->qrcode_url)->toHtml() !!}</div>
+                                <button class="edit-btn" data-reservation-id="{{ $reservation->id }}"
+                                    data-reservation-date="{{ $reservation->date }}"
+                                    data-reservation-time="{{ $reservation->time }}"
+                                    data-reservation-people="{{ $reservation->people }}"
+                                    data-reservation-user-id="{{ $reservation->user_id }}">
+                                    予約内容変更
+                                </button>
+                            @elseif (!$reservation->rating_id)
+                                <button class="rating-btn" data-rating-reservation-id="{{ $reservation->id }}"
+                                    data-rating-user-id="{{ $reservation->user_id }}"
+                                    data-rating-shop-id="{{ $reservation->shop_id }}">評価する</button>
                             @endif
                         </div>
                     @endforeach
@@ -80,7 +93,16 @@
                             </div>
                         @endforeach
                     </div>
+                    @if ($reservations->isNotEmpty())
+                        @include('components.reservation_edit_modal')
+                        @include('components.rating_modal')
+                    @endif
                 </section>
             </div>
         </main>
     @endsection
+
+    @push('scripts')
+        <script src="{{ asset('js/reservation_edit_modal.js') }}"></script>
+        <script src="{{ asset('js/rating_modal.js') }}"></script>
+    @endpush

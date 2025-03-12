@@ -16,10 +16,11 @@ class Reservation extends Model
     protected $fillable = [
         'user_id',
         'shop_id',
+        'rating_id',
         'date',
         'time',
         'people',
-        'reservation_code',
+        'reservation_code', 
         'reservation_status_id',
     ];
 
@@ -30,7 +31,12 @@ class Reservation extends Model
 
     public function shop()
     {
-        return $this->belongsTo(Shop::class, 'shop_id');
+        return $this->belongsTo(Shop::class, 'shop_id'); 
+    }
+
+    public function getTimeAttribute($value)
+    {
+        return Carbon::parse($value)->format('H:i');
     }
 
     public function getTimeAttribute($value)
@@ -45,6 +51,7 @@ class Reservation extends Model
             'shops.id as shop_id',
             'shops.name as shop_name',
             'reservations.id',
+            'reservations.rating_id',
             'reservations.date',
             'reservations.time',
             'reservations.people',
@@ -60,7 +67,7 @@ class Reservation extends Model
                 $reservation->time = Carbon::parse($reservation->time)->format('H:i');
                 $localIp = config('app.local_ip'); // 設定値を取得
                 $reservation->qrcode_url = $localIp . '/owner/check-in?reservation_code=' . $reservation->reservation_code;
-
+                
                 return $reservation;
             });
     }
@@ -130,5 +137,10 @@ class Reservation extends Model
             ->orderBy('reservations.id', 'asc');
 
         return $query;
+    }
+
+    public static function updateReservation($data, $reservationId)
+    {
+        self::findOrFail($reservationId)->update($data);
     }
 }

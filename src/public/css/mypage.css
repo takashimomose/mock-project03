@@ -68,6 +68,7 @@
 }
 
 .delete-btn {
+    margin-top: 20px;
     color: #FFF;
     border: none;
     background: #2F5CFF;
@@ -88,6 +89,37 @@
 .reservation-table th {
     white-space: nowrap;
     padding-right: 20px;
+}
+
+.edit-btn {
+    display: block;
+    margin: 20px auto 0px auto;
+    padding: 10px 20px;
+    background: #FFF;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    opacity: 0.7;
+}
+
+.rating-btn {
+    display: block;
+    margin: 20px auto 0px auto;
+    padding: 10px 20px;
+    color: #000;
+    background: #FFCF0A;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.rate-btn:hover {
+    opacity: 0.7;
 }
 
 .qr-code svg {
