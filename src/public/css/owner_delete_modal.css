@@ -18,7 +18,7 @@
     padding: 20px;
     border-radius: 10px;
     margin: 0 auto;
-    border: 2px solid #5580F7;
+    border: 2px solid #3560F6;
 }
 
 .modal-content p {
@@ -37,7 +37,7 @@
 .okay-btn, .cancel-btn {
     padding: 10px 15px;
     border: none;
-    background: #5580F7;
+    background: #3560F6;
     color: #FFF;
     border-radius: 5px;
     cursor: pointer;

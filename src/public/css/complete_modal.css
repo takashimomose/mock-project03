@@ -21,7 +21,7 @@
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-    border: 2px solid #5580F7;
+    border: 2px solid #3560F6;
     flex-direction: column;
 }
 
@@ -35,7 +35,7 @@
     display: block;
     padding: 10px 15px;
     border: none;
-    background: #5580F7;
+    background: #3560F6;
     color: #FFF;
     border-radius: 5px;
     cursor: pointer;

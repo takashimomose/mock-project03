@@ -41,7 +41,6 @@ class AuthController extends Controller
         return redirect()->route('auth.show')->with('verified', true);
     }
 
-
     public function store(AuthRequest $request)
     {
         $credentials = $request->validated();

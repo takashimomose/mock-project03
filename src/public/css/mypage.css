@@ -53,7 +53,6 @@
 
 .card-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
@@ -63,6 +62,7 @@
 }
 
 .reservation-order {
+    margin-top: 8px;
     padding-right: 40%;
     white-space: nowrap;
 }
@@ -84,6 +84,11 @@
     border-collapse: separate;
     margin: 10px 0;
     text-align: left;
+}
+
+.reservation-table th {
+    white-space: nowrap;
+    padding-right: 20px;
 }
 
 .edit-btn {

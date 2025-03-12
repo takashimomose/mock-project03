@@ -15,7 +15,7 @@
                         <div class="reservation-card">
                             <div class="card-header">
                                 <i class="fa-solid fa-clock"></i>
-                                <span class="reservation-order">予約{{ $loop->iteration }}</span>
+                                <p class="reservation-order">予約{{ $loop->iteration }}</p>
                                 <form action="{{ route('reservation.delete', $reservation->id) }}" method="POST"
                                     onsubmit="return confirm('予約をキャンセルしますか？');">
                                     @csrf
@@ -30,7 +30,7 @@
                             <table class="reservation-table">
                                 <tr>
                                     <th>Shop</th>
-                                    <td>{{ $reservation->shop_name }}</td>
+                                    <td>{{ Str::limit($reservation->shop_name, 24, '...') }}</td>
                                 </tr>
                                 <tr>
                                     <th>Date</th>
@@ -74,7 +74,7 @@
                             <div class="card">
                                 <img src="{{ $likedshop->shop_image }}" alt="{{ $likedshop->name }}">
                                 <div class="card-content">
-                                    <h2>{{ $likedshop->name }}</h2>
+                                    <h2>{{ Str::limit($likedshop->name, 18, '...') }}</h2>
                                     <a
                                         href="{{ route('shop.index') }}?area_id={{ $likedshop->area_id }}">#{{ $likedshop->area_name }}</a>
                                     <a
