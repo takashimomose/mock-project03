@@ -43,6 +43,7 @@
                                     <ul class="menu">
                                         <li class="menu_item"><a href="{{ route('shop.list') }}">HOME</a></li>
                                         <li class="menu_item"><a href="{{ route('shop.list') }}">Shop</a></li>
+                                        <li class="menu_item"><a href="{{ route('reservation.index') }}">Reservation</a></li>
                                         <li class="menu_item">
                                             <form action="{{ route('auth.destroyOwner') }}" method="POST">
                                                 @csrf

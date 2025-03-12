@@ -76,7 +76,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            return redirect()->intended('/owner/shop/create');
+            return redirect()->intended('/owner/shop/list');
         }
 
         return back()->withErrors([

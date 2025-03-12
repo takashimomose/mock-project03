@@ -11,7 +11,7 @@
         <section class="shop-detail-section">
             <div class="shop-info">
                 <a href="{{ route('shop.index') }}" class="back-btn">&lt;</a>
-                <p class="shop-name">{{ $shop->name }}</p>
+                <p class="shop-name">{{ Str::limit($shop->name, 38, '...') }}</p>
                 <img src="{{ $shop->shop_image }}" alt="{{ $shop->name }}" class="shop-image">
                 <a href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
                 <a href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
@@ -64,7 +64,7 @@
                         <table class="reservation-table">
                             <tr>
                                 <th>Shop</th>
-                                <td>{{ $shop->name }}</td>
+                                <td>{{ Str::limit($shop->name, 30, '...') }}</td>
                             </tr>
                             <tr>
                                 <th>Date</th>
