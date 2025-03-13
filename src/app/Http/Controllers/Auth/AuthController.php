@@ -82,6 +82,10 @@ class AuthController extends Controller
 
     public function showOwner()
     {
+        if (auth()->check()) {
+            return redirect()->route('shop.list');
+        }
+        
         return view('auth.owner_login');
     }
 

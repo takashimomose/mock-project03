@@ -12,7 +12,11 @@
             <div class="shop-info">
                 <a href="{{ route('shop.index') }}" class="back-btn">&lt;</a>
                 <p class="shop-name">{{ Str::limit($shop->name, config('const.SHOP_DETAIL_SHOP_NAME_LIMIT'), '...') }}</p>
-                <img src="{{ $shop->shop_image }}" alt="{{ $shop->name }}" class="shop-image">
+                @if (filter_var($shop->shop_image, FILTER_VALIDATE_URL))
+                    <img class="shop-image" src="{{ $shop->shop_image }}" alt="{{ $shop->name }}">
+                @else
+                    <img class="shop-image" src="{{ Storage::url($shop->shop_image) }}" alt="{{ $shop->name }}">
+                @endif
                 <a href="{{ route('shop.index') }}?area_id={{ $shop->area_id }}">#{{ $shop->area_name }}</a>
                 <a href="{{ route('shop.index') }}?genre_id={{ $shop->genre_id }}">#{{ $shop->genre_name }}</a>
                 <p>{{ $shop->description }}</p>
@@ -64,7 +68,8 @@
                         <table class="reservation-table">
                             <tr>
                                 <th>Shop</th>
-                                <td>{{ Str::limit($shop->name, config('const.SHOP_DETAIL_RESERVATION_SHOP_NAME_LIMIT'), '...') }}</td>
+                                <td>{{ Str::limit($shop->name, config('const.SHOP_DETAIL_RESERVATION_SHOP_NAME_LIMIT'), '...') }}
+                                </td>
                             </tr>
                             <tr>
                                 <th>Date</th>

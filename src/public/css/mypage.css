@@ -53,7 +53,8 @@
 
 .card-header {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    /* justify-content: space-between; */
 }
 
 .card-header i {
@@ -62,8 +63,7 @@
 }
 
 .reservation-order {
-    margin-top: 8px;
-    padding-right: 40%;
+    padding-right: 55%;
     white-space: nowrap;
 }
 
@@ -217,6 +217,12 @@
     opacity: 0.7;
 }
 
+@media (max-width: 1024px) {
+    .reservation-order {
+        padding-right: 40%;
+    }
+}
+
 @media (max-width: 768px) {
     .wrapper {
         display: block;
@@ -233,6 +239,10 @@
         justify-content: center;
         align-items: center;
         width: 280px;
+    }
+
+    .reservation-order {
+        padding-right: 40%;
     }
 
     .favorite-section {
