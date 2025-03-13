@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,8 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'role_id',
         'name',
         'email',
+        'email_verified_at',
         'password',
     ];
 
@@ -41,4 +43,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const ROLE_ADMIN = 1;
+    const ROLE_OWNER = 2;
+    const ROLE_GENERAL = 3;
+
+    public static function getUsers()
+    {
+        $query = self::select(
+            'users.id',
+            'roles.role_name as role_name',
+            'users.name',
+            'users.email',
+            'users.password',
+            'users.created_at'
+        )
+            ->join('roles', 'users.role_id', '=', 'roles.id')
+            ->orderBy('users.id', 'asc');
+
+        return $query;
+    }
+
+    public static function deleteOwner($userId)
+    {
+        return self::destroy($userId);
+    }
 }

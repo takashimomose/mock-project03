@@ -232,4 +232,6 @@ return [
 
     ],
 
+    'local_ip' => env('LOCAL_IP'),
+
 ];

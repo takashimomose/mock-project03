@@ -1,0 +1,66 @@
+.wrapper {
+    margin: 30px auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.registration-section {
+    background: #FFF;
+    width: 350px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.card-header {
+    background: #2d64fb;
+    color: #FFF;
+    text-align: left;
+    padding: 18px;
+    font-size: 1.125rem;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #FFF;
+    padding: 10px;
+}
+
+.input-group i {
+    color: #4B4B4B;
+    font-size: 1.25rem;
+    margin-right: 10px;
+}
+
+.form-input {
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.primary-btn {
+    background: #2d64fb;
+    color: #FFF;
+    width: 23%;
+    padding: 6px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: auto;
+    margin-top: 15px;
+}
+
+.primary-btn:hover {
+    opacity: 0.7;
+}

@@ -1,0 +1,69 @@
+.wrapper {
+    margin: 0 auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.check-in-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    max-width: 500px;
+    width: 100%;
+    flex-direction: column;
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.check-in-section h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    font-weight: 700;
+}
+
+.form-group {
+    width: 500px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.form-buttons button {
+    display: inline-block;
+} 
+
+.cancel-btn, .primary-btn {
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    margin: 30px 0 20px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    color: #3560F6;
+    background: #FFF;
+    border: 2px solid #3560F6;
+    text-align: center;
+    text-decoration: none;
+}
+
+.primary-btn {
+    color: #FFF;
+    background: #3560F6;
+    border: none;
+}

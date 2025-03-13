@@ -1,0 +1,80 @@
+.wrapper {
+    margin: 0 auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.registration-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    width: 500px;
+    flex-direction: column;
+    background: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.registration-section h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.form-label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.delete-btn {
+    display: block;
+    padding: 8px 20px;
+    background: #FFB6BB;
+    color: #FFF;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.form-buttons button {
+    display: inline-block;
+} 
+
+.cancel-btn, .primary-btn {
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    margin: 30px 0 20px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    color: #3560F6;
+    background: #FFF;
+    border: 2px solid #3560F6;
+    text-align: center;
+    text-decoration: none;
+}
+
+.primary-btn {
+    color: #FFF;
+    background: #3560F6;
+    border: none;
+}
