@@ -11,7 +11,7 @@
         <section class="visited-section">
             <h1>予約確認</h1>
             <p>来店済みです</p>
-            <a href="" class="reservation-list-btn">予約一覧</a>
+            <a href="{{ route('reservation.index') }}" class="reservation-list-btn">予約一覧</a>
             @include('components.complete_modal')
         </section>
     </main>

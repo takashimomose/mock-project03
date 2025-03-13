@@ -30,7 +30,8 @@
                             <table class="reservation-table">
                                 <tr>
                                     <th>Shop</th>
-                                    <td>{{ Str::limit($reservation->shop_name, config('const.MY_PATE_SHOP_NAME_LIMIT'), '...') }}</td>
+                                    <td>{{ Str::limit($reservation->shop_name, config('const.MY_PATE_SHOP_NAME_LIMIT'), '...') }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>Date</th>
@@ -72,13 +73,18 @@
                     <div class= "card-group">
                         @foreach ($likedShops as $likedshop)
                             <div class="card">
-                                <img src="{{ $likedshop->shop_image }}" alt="{{ $likedshop->name }}">
+                                @if (filter_var($likedshop->shop_image, FILTER_VALIDATE_URL))
+                                    <img src="{{ $likedshop->shop_image }}" alt="{{ $likedshop->name }}">
+                                @else
+                                    <img src="{{ Storage::url($likedshop->shop_image) }}" alt="{{ $likedshop->name }}">
+                                @endif
                                 <div class="card-content">
-                                    <h2>{{ Str::limit($likedshop->name, config('const.MY_PAGE_LIKED_SHOP_NAME_LIMIT'), '...') }}</h2>
+                                    <h2>{{ Str::limit($likedshop->name, config('const.MY_PAGE_LIKED_SHOP_NAME_LIMIT'), '...') }}
+                                    </h2>
                                     <a
-                                        href="{{ route('shop.index') }}?area_id={{ $likedshop->area_id }}">#{{ $likedshop->area_name }}</a>
+                                        href="{{ route('shop.index') }}?area_id={{ $likedshop->area_id }}">#{{ Str::limit($likedshop->area_name, config('const.SHOP_LIST_AREA_NAME_LIMIT'), '...') }}</a>
                                     <a
-                                        href="{{ route('shop.index') }}?genre_id={{ $likedshop->genre_id }}">#{{ $likedshop->genre_name }}</a>
+                                        href="{{ route('shop.index') }}?genre_id={{ $likedshop->genre_id }}">#{{ Str::limit($likedshop->genre_name, config('const.SHOP_LIST_GENRE_NAME_LIMIT'), '...') }}</a>
                                     <div class="card-buttons">
                                         <a href="{{ route('shop.detail', ['shop_id' => $likedshop->id]) }}"
                                             class="shop-detail">詳しくみる</a>
